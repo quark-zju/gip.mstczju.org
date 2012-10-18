@@ -7,7 +7,6 @@ GEM
   remote: https://rubygems.org/
   specs:
     RedCloth (4.2.9)
-    ace-rails-ap (1.0.0)
     actionmailer (3.2.8)
       actionpack (= 3.2.8)
       mail (~> 2.4.4)
@@ -174,7 +173,6 @@ PLATFORMS
 
 DEPENDENCIES
   RedCloth
-  ace-rails-ap
   activerecord-jdbcpostgresql-adapter
   acts_as_commentable
   annotate
