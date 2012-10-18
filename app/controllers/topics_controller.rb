@@ -42,7 +42,7 @@ class TopicsController < ApplicationController
 
   private
 
-  def save(op, view)
+  def save(op, view=nil)
     if yield 
       redirect_to @topic
     else
