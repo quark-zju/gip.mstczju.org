@@ -11,7 +11,11 @@ gem 'thin', platforms: :mri
 gem 'puma', platforms: [:rbx, :jruby]
 gem 'jruby-openssl', platforms: :jruby
 gem 'activerecord-jdbcpostgresql-adapter', platforms: :jruby
-gem 'rrails', path: '/home/quark/src/github/quark-zju/rrails'
+if Dir.exists? '/home/quark/src/github/quark-zju/rrails'
+  gem 'rrails', path: '/home/quark/src/github/quark-zju/rrails'
+else
+  gem 'rrails'
+end
 
 gem 'thumbs_up'
 gem 'acts_as_commentable'
@@ -22,26 +26,25 @@ gem 'acts_as_commentable'
 # gem 'pg', platforms: :mri
 # gem 'jbuilder'
 # gem 'capistrano'
-gem 'bitmask_attributes'
-gem 'pry-debugger'
+# gem 'bitmask_attributes'
+# gem 'pry-debugger'
 # gem 'debugger'
 gem 'RedCloth'
 gem 'ace-rails-ap'
-gem 'codemirror-rails'
+# gem 'codemirror-rails'
 gem 'redcarpet'
 gem 'devise'
 gem 'devise-i18n'
 gem 'cancan'
-gem 'gravatar_image_tag'
+# gem 'gravatar_image_tag'
 gem 'github-markup'
-gem 'opinio'
+# gem 'opinio'
 # gem 'coderay'
 # gem 'nokogiri'
 # gem 'formtastic'
-gem 'simple_form'
+# gem 'simple_form'
 # gem 'will_paginate'
-gem 'friendly_id'
-gem 'github-markup'
+# gem 'friendly_id'
 # gem 'country_select'
 # gem 'term-ansicolor', require: false
 # gem 'rack-webconsole', require: false
@@ -52,7 +55,7 @@ group :assets do
   gem 'coffee-rails', '~> 3.2.1'
   gem 'therubyracer', platforms: :mri
   gem 'uglifier', '>= 1.0.3'
-  gem 'compass-rails'
+  # gem 'compass-rails'
   gem 'zurb-foundation'
 end
 
@@ -60,7 +63,7 @@ group :development do
   gem 'pry'
   gem 'annotate'
   gem 'warbler', platforms: [:jruby], require: false
-  gem 'rack-webconsole'
+  # gem 'rack-webconsole'
 end
 
 group :test do
