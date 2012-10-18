@@ -1,0 +1,49 @@
+// Place all the styles related to the topics controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+@import 'foundation_and_overrides';
+
+@media screen {
+  .comment-edit {
+    textarea {
+      max-height: 40em;
+    }
+  }
+  
+  .vote_count {
+    padding: ms(0) / $golden;
+    margin-top: ms(0);
+    background: darken($white, 10%);
+  }
+  
+  #editor {
+    position: relative;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    min-height: 12em;
+  }
+  
+  article.topic {
+    .content {
+      h1 {
+        font-size: 1.6em;
+      }
+      h2 { 
+        font-size: 1.4em; 
+      }
+      h3 {
+        font-size: 1.2em;
+      }
+      h4, h5, h6 {
+        font-size: 1.1em;
+      }
+    }
+    .preview {
+      max-height: 100px;
+      overflow-y: hidden;
+    }
+  }
+}

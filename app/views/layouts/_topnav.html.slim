@@ -1,0 +1,42 @@
+/.row
+  .twelve.columns
+    ul.nav-bar
+      li = link_to 'Topics', topics_path
+      li = link_to 'New Topic', new_topic_path
+      li = current_staff.name
+      li = link_to 'Logout', destroy_staff_session_path, method: :delete
+    ul.right
+      li = current_staff.name
+      li = link_to 'Logout', destroy_staff_session_path, method: :delete
+
+nav.top-bar.contain-to-gird
+  ul
+    li.name
+      h1
+        a href='/' GIP::Vote
+    li.toggle-topbar
+      a
+  section
+    ul.left
+      - if can? :read, Topic
+        li.divider
+        li = link_to 'Topics', topics_path
+      - if can? :create, Topic
+        li.divider
+        li = link_to 'New Topic', new_topic_path
+      li.divider
+    ul.right
+      - if current_staff
+        li.has-dropdown
+          a = current_staff.name
+          ul.dropdown
+            li = link_to 'Sign out', destroy_staff_session_path, method: :delete
+      - else
+        li = link_to 'Sign in', new_staff_session_path
+
+script
+  | $(function() { 
+      $(document).foundationTopBar();
+      $(document).foundationTopBar();
+    });
+

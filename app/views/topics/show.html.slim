@@ -1,0 +1,47 @@
+.row
+  / main content
+  .ten.columns.push-two
+    .row.display
+      .twelve.columns
+        article.topic
+          h2 = @topic.title
+          .content
+            == @topic.markup
+    .row.display
+      .twelve.columns
+        .button-bar
+          - if can? :manage, @topic
+            ul.button-group
+              li = link_to 'Edit', edit_topic_path(@topic), :class => 'button'
+              li = link_to 'Delete', @topic, :confirm => 'Are you sure?', :method => :delete, :class => [:button, :alert]
+          - if can? :vote, @topic
+            ul.button-group
+              - voted = @topic.voted_by?(current_staff)
+              li = link_to 'Vote', vote_topic_path(@topic), :method => :post, :class => [:button, *(voted ? :disabled : nil)]
+              li = link_to 'Unvote', unvote_topic_path(@topic), :method => :post, :class => [:button, *(voted ? nil : :disabled)]
+
+  / left sidebar
+  .two.columns.pull-ten
+    h3.right
+    .panel
+      p
+        small Voters
+        br
+        = @topic.voters_who_voted.map(&:name).join(', ').presence || @topic.votes_count
+    .panel
+      p
+        small Author
+        br
+        = @topic.staff.name
+      p 
+        small Updated At
+        br
+        = l @topic.updated_at, :format => :short
+
+/ comments
+- @topic.comments.each do |comment|
+  == render comment
+
+- if can? :comment, @topic
+  == render @topic.comments.build(user_id: current_staff.id)
+

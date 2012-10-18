@@ -1,0 +1,78 @@
+= form_for @topic do |f|
+  /- if @topic.errors.any?
+    .row
+      .twelve.columns
+        .panel
+          ul
+            - @topic.errors.full_messages.each do |msg|
+              li = msg
+  .row
+    .ten.columns
+      .field
+        = f.label :title
+        = f.text_field :title
+      .field
+        = f.label :content
+        = f.text_area :content
+        #editor
+    .two.columns.end
+      .field
+        = f.label :status
+        = f.select :status, Topic::STATUS_LIST.map.with_index { |x, i| [x.capitalize, i] }
+      .field
+        = f.label :text_filter
+        = f.select :text_filter, Topic::TEXT_FILTER_LIST.map.with_index.to_a
+  .row
+    .twelve.columns
+      hr
+      .actions
+        = f.submit class: 'button'
+
+/ Use ACE editor
+coffee:
+  $ ->
+    textarea = $('#topic_content')
+    textarea.hide()
+    editor = ace.edit('editor')
+    window.editor = editor
+    editor.div = $('#editor')
+    editor.setValue(textarea.val())
+    editor.getSession().on 'change', ->
+      # sync with textarea
+      textarea.val(editor.getValue())
+      # adjust height
+      cells = $('#editor .ace_gutter-cell')
+      lines = (editor.getValue().match(/\n/g)||[]).length + 1
+      height = cells.height() * lines
+      if height != editor.div.height() && lines < 60 && lines > 10
+        editor.div.height(height)
+        editor.resize()
+    onModeChange = (mode)->
+      nextMode = if mode == '0' 
+                    'ace/mode/markdown'
+                  else
+                    'ace/mode/textile'
+      editor.getSession().setMode(nextMode)
+    textFilter = $('#topic_text_filter')
+    textFilter.change (e)->
+      onModeChange e.target.value
+    onModeChange(textFilter.val())
+
+/ Use CodeMirror editor
+/coffee:
+  $ ->
+    textarea = $('#topic_content')[0]
+    window.editor = CodeMirror.fromTextArea textarea,
+                      matchBrackets: true
+    onModeChange = (mode)->
+      next_mode = if mode == '0' 
+                    'gfm'
+                  else
+                    'htmlmixed'
+      window.editor.setOption('mode', next_mode)
+    textFilter = $('#topic_text_filter')
+    textFilter.change (e)->
+      onModeChange e.target.value
+    onModeChange(textFilter.val())
+
+

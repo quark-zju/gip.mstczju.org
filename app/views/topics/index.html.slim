@@ -1,0 +1,20 @@
+/.row
+  .twelve.columns
+    dl.sub-nav
+      dd 
+        a By Vote
+      dd 
+        a By Update Date
+
+- @topics.each do |topic|
+  .row
+    .two.columns
+      .right.vote_count
+        span.right = count_as_zheng(topic.votes_count)
+        br
+        small Voted
+    .ten.columns role='content'
+      article.topic
+        h2 = link_to topic.title, topic
+        .content.preview
+          == topic.markup
