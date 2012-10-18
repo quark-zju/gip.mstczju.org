@@ -1,7 +1,7 @@
 CREATE TABLE "comments" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "title" varchar(50) DEFAULT '', "comment" text, "commentable_id" integer, "commentable_type" varchar(255), "user_id" integer, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL);
 CREATE TABLE "schema_migrations" ("version" varchar(255) NOT NULL);
 CREATE TABLE "staffs" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "email" varchar(255) DEFAULT '' NOT NULL, "nick" varchar(255) DEFAULT '' NOT NULL, "name" varchar(255) DEFAULT '' NOT NULL, "remember_created_at" datetime, "sign_in_count" integer DEFAULT 0, "current_sign_in_at" datetime, "last_sign_in_at" datetime, "current_sign_in_ip" varchar(255), "last_sign_in_ip" varchar(255), "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL);
-CREATE TABLE "topics" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "title" varchar(255), "content" text, "staff_id" integer, "category_id" integer, "status" integer, "text_filter" integer, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL);
+CREATE TABLE "topics" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "title" varchar(255), "content" text, "staff_id" integer, "category_id" integer, "state" integer, "text_filter" integer, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL);
 CREATE TABLE "votes" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "vote" boolean DEFAULT 'f' NOT NULL, "voteable_id" integer NOT NULL, "voteable_type" varchar(255) NOT NULL, "voter_id" integer, "voter_type" varchar(255), "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL);
 CREATE UNIQUE INDEX "fk_one_vote_per_user_per_entity" ON "votes" ("voter_id", "voter_type", "voteable_id", "voteable_type");
 CREATE INDEX "index_comments_on_commentable_id" ON "comments" ("commentable_id");
@@ -21,3 +21,5 @@ INSERT INTO schema_migrations (version) VALUES ('20121010232626');
 INSERT INTO schema_migrations (version) VALUES ('20121010233050');
 
 INSERT INTO schema_migrations (version) VALUES ('20121017024304');
+
+INSERT INTO schema_migrations (version) VALUES ('20121018191709');

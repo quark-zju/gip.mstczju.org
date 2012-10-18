@@ -26,7 +26,7 @@ gem 'acts_as_commentable'
 # gem 'pg', platforms: :mri
 # gem 'jbuilder'
 # gem 'capistrano'
-# gem 'bitmask_attributes'
+gem 'bitmask_attributes'
 # gem 'pry-debugger'
 # gem 'debugger'
 gem 'RedCloth'

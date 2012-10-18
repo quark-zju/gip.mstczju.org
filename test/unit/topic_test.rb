@@ -7,7 +7,7 @@
 #  content     :text
 #  staff_id    :integer
 #  category_id :integer
-#  status      :integer
+#  state       :integer
 #  text_filter :integer
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null

@@ -4,9 +4,6 @@ class TopicsController < ApplicationController
 
   def index
     @topics = @topics.tally.scoped
-    if params[:status] != 'all'
-      @topics = @topics.where(:status => Topic::STATUS_LIST.index((params[:status] || :open).to_sym)).scoped
-    end
   end
 
   def show

@@ -17,8 +17,13 @@
         #editor
     .two.columns.end
       .field
-        = f.label :status
-        = f.select :status, Topic::STATUS_LIST.map.with_index { |x, i| [x.capitalize, i] }
+        = f.label :state
+        table
+          tbody
+            - Topic::STATES.each do |st|
+              tr
+                td = f.check_box st
+                td = f.label st
       .field
         = f.label :text_filter
         = f.select :text_filter, Topic::TEXT_FILTER_LIST.map.with_index.to_a
