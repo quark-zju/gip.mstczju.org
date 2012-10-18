@@ -15,7 +15,8 @@ head
   / Set the viewport width to device width for mobile
   meta name="viewport" content="width=device-width, initial-scale=1.0"
 
-  title= content_for?(:title) ? yield(:title) : "Untitled"
+  - base_title = 'MSTCZJU::GIP'
+  title= [content_for?(:title) ? yield(:title) : nil, base_title].compact.join(' | ')
 
   / Included CSS Files
   = stylesheet_link_tag "application"
