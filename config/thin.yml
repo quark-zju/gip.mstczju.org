@@ -9,9 +9,9 @@ max_conns: 51200
 max_persistent_conns: 512
 require: []
 wait: 30
-socket: tmp/sockets/thin.socket
-# address: 127.0.0.1
-# port: 5000
+# socket: tmp/sockets/thin.socket
+address: 127.0.0.1
+port: 5010
 servers: 2
 daemonize: true
 onebyone: true
