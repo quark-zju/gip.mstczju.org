@@ -1,7 +1,7 @@
 - comment ||= @comment
 - hide_edit = false
 - if comment.persisted?
-  .row class="comment-#{comment.id}-body"
+  .row.comment-body class="comment-#{comment.id}-body"
     .two.columns
       p
         span.name.right = comment.user.name
@@ -18,7 +18,7 @@
         a.button.tiny.right onclick="EditComment(#{comment.id})" Edit
         - hide_edit = true
 - if can? :edit, comment
-  .row class="comment-edit comment-#{comment.id}-edit #{hide_edit && 'hidden'}"
+  .row.comment-edit class="comment-#{comment.id}-edit #{hide_edit && 'hidden'}"
     .two.columns
       p
         span.name.right = comment.user.name

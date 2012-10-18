@@ -29,6 +29,10 @@ textarea {
     textarea {
       font-family: $codeFontFamily;
     }
+
+    small {
+      font-size: ms(0) / $golden;
+    }
   }
 }
 
