@@ -55,7 +55,7 @@ group :assets do
   gem 'coffee-rails', '~> 3.2.1'
   gem 'therubyracer', platforms: :mri
   gem 'uglifier', '>= 1.0.3'
-  # gem 'compass-rails'
+  gem 'compass-rails'
   gem 'zurb-foundation'
 end
 
