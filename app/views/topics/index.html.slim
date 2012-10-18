@@ -7,15 +7,16 @@
         a By Update Date
 - content_for(:title) { 'Vote::Topic::Index' }
 
-- @topics.each do |topic|
-  .row
-    .two.columns
-      .right.vote_count
-        span.right = count_as_zheng(topic.votes_count)
-        br
-        small Voted
-    .ten.columns role='content'
-      article.topic
-        h2 = link_to topic.title, topic
-        .content.preview
-          == topic.markup
+.topic-list
+  - @topics.each do |topic|
+    .row
+      .two.columns.mobile-one.push-three-mobile
+        .right.vote_count
+          span.right = count_as_zheng(topic.votes_count)
+          br
+          small.right.hide-for-small Voted
+      .ten.columns.mobile-three.pull-one-mobile
+        article.topic
+          h2 = link_to topic.title, topic
+          .content.preview.hide-for-small
+            == topic.markup

@@ -2,56 +2,56 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-@import 'foundation_and_overrides';
+@import 'base';
 
-@media screen {
-  .comment-edit {
-    textarea {
-      max-height: 40em;
+html {
+  @media screen {
+    .vote_count {
+      padding: ms(0) / $golden;
+      margin-top: ms(0);
+      background: darken($white, 10%);
+    }
+
+    #editor {
+      position: relative;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      min-height: 12em;
+    }
+
+    article.topic {
+      .preview {
+        max-height: 100px;
+        overflow-y: hidden;
+      }
+    }
+
+    .comment-edit {
+      textarea {
+        max-height: 40em;
+      }
+    }
+
+    .comment-body, .topic .content {
+      @include resizeHeaders(ms(0));
     }
   }
 
-  .comment-body {
-    h1, h2, h3, h4, h5, h6 {
-      font-size: 1em;
+  @include respondTo(smallScreen) {
+    // for a compact topic index
+    .vote_count {
+      float: right;
+      padding: 0;
+      margin-top: ms(0) * 0.65;
+      background: none;
     }
-  }
-  
-  .vote_count {
-    padding: ms(0) / $golden;
-    margin-top: ms(0);
-    background: darken($white, 10%);
-  }
-  
-  #editor {
-    position: relative;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    min-height: 12em;
-  }
-  
-  article.topic {
-    .content {
-      h1 {
-        font-size: 1.6em;
-      }
-      h2 { 
-        font-size: 1.4em; 
-      }
-      h3 {
-        font-size: 1.2em;
-      }
-      h4, h5, h6 {
-        font-size: 1.1em;
-      }
-    }
-    .preview {
-      max-height: 100px;
-      overflow-y: hidden;
-    }
-  }
 
-
+    .topic-list h2 {
+      font-size: ms(0) * 1.3;
+      margin-top: ms(0) / 2;
+      margin-bottom: 0;
+    }
+  }
 }

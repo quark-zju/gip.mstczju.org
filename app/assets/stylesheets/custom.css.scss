@@ -1,20 +1,12 @@
-@import 'foundation_and_overrides';
+@import 'base';
 
 textarea {
   resize: none;
 }
 
-.nav-background {
-  background: lighten($black, 30%);
-}
-
-.hidden {
-  display: none;
-}
-
 // overwrite foundation badness
-@media screen {
-  html {
+html {
+  @media screen {
     code {
       background: none;
       font-weight: normal;

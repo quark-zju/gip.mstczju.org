@@ -2,7 +2,7 @@
 - hide_edit = false
 - if comment.persisted?
   .row.comment-body class="comment-#{comment.id}-body"
-    .two.columns
+    .two.columns.mobile-one
       p
         span.name.right = comment.user.name
         br
@@ -11,15 +11,15 @@
           small.right ;&nbsp;
         small.created_at.right = l comment.created_at, :format => :short
 
-    .nine.columns
+    .nine.columns.mobile-three
       == GitHub::Markup.render('comment.md', comment.comment)
-    .one.column
+    .one.column.hide-for-small
       - if can?(:edit, comment)
         a.button.tiny.right onclick="EditComment(#{comment.id})" Edit
         - hide_edit = true
 - if can? :edit, comment
-  .row.comment-edit class="comment-#{comment.id}-edit #{hide_edit && 'hidden'}"
-    .two.columns
+  .row.comment-edit class="comment-#{comment.id}-edit #{hide_edit && 'hide'}"
+    .two.columns.hide-for-small
       p
         span.name.right = comment.user.name
     .nine.columns
