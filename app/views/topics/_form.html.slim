@@ -37,6 +37,7 @@ coffee:
     window.editor = editor
     editor.div = $('#editor')
     editor.setValue(textarea.val())
+    editor.clearSelection()
     editor.getSession().on 'change', ->
       # sync with textarea
       textarea.val(editor.getValue())
