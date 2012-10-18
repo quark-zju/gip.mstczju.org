@@ -37,11 +37,12 @@ html {
     // ACE Editor composing textarea
     textarea.ace_composition {
       border: none;
-      @include border-radius(0px);
-      @include box-shadow(none);
-      padding: 0;
       margin: 0;
+      padding: 0;
+      @include border-radius(0px);
+      @include box-shadow(0 1px 2px rgba(0,0,0,0.1));
       overflow-y: hidden;
+      @include transition(none 0.0s linear);
     }
 
     // CodeMirror auto expand height

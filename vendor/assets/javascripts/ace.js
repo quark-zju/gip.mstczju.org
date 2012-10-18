@@ -11787,9 +11787,11 @@ var VirtualRenderer = function(container, theme) {
         if (posTop < 0 || posTop > this.layerConfig.height - this.lineHeight)
             return;
 
-        var w = this.characterWidth;
+        var w = this.characterWidth, w2 = 0;
         if (this.$composition)
-            w += this.textarea.scrollWidth;
+            w2 = this.textarea.scrollWidth;
+        if (w2 > w) w = w2;
+
         posLeft -= this.scrollLeft;
         if (posLeft > this.$size.scrollerWidth - w)
             posLeft = this.$size.scrollerWidth - w;
@@ -11797,7 +11799,7 @@ var VirtualRenderer = function(container, theme) {
         if (this.showGutter)
             posLeft += this.$gutterLayer.gutterWidth;
 
-        this.textarea.style.height = this.lineHeight + "px";
+        this.textarea.style.height = (this.lineHeight + 6) + "px";
         this.textarea.style.width = w + "px";
         this.textarea.style.left = posLeft + "px";
         this.textarea.style.top = posTop - 1 + "px";
