@@ -7,7 +7,10 @@ class Ability
       can :manage, Comment, :user_id => user.id
 
       can [:vote, :unvote, :comment, :update], Topic
-      cannot [:vote, :unvote], Topic, :staff_id => user.id
+
+      # > itsuhane(29888088)  23:29:40
+      # > 话说，@quark 求创建者投自己的 topic 的能力 >_<
+      # cannot [:vote, :unvote], Topic, :staff_id => user.id
 
       can [:read, :create], [Topic, Comment]
     end
