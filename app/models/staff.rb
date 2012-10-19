@@ -22,7 +22,9 @@ require 'json'
 class Staff < ActiveRecord::Base
   devise :rememberable, :remote_authenticatable, :trackable
 
-  attr_accessible :email, :remember_me, :nick, :password, :name
+  attr_accessible :email, :remember_me, :nick, :password, :name, :preferences
+
+  serialize :preferences, Preferences
 
   attr_accessor :password
 

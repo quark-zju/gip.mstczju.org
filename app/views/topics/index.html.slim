@@ -13,9 +13,12 @@
       .row
         .three.columns.mobile-one.push-three-mobile
           .right.vote-count
-            span.right = count_as_zheng(topic.votes_count)
-            br
-            small.right.hide-for-small Voted
+            - if current_preferences.vote_display == Preferences::VOTE_DISPLAY_OPTIONS.index(:Zheng)
+              span.right = count_as_zheng(topic.votes_count)
+            - else
+              span.right = topic.votes_count
+            /br
+            /small.right.hide-for-small Voted
         .nine.columns.mobile-three.pull-one-mobile
           article.topic
             h2 = link_to topic.title, topic

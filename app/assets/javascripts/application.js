@@ -27,9 +27,10 @@
 // require foundation/jquery.foundation.orbit
 //=require foundation/jquery.foundation.mediaQueryToggle
 //
-//= require ace
-//= require mode-markdown
-//= require mode-textile
+//  // Use remote ACE instead
+//  require ace
+//  require mode-markdown
+//  require mode-textile
 //
 //= require_tree .
 

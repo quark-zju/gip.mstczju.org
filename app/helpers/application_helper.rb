@@ -31,4 +31,12 @@ module ApplicationHelper
   def ti(time)
     time.localtime.strftime('%y-%m-%d %H:%M')
   end
+
+  def integer_select(form, field, list, *options)
+    form.select field, options_for_select(list.map.with_index.to_a), *options
+  end
+
+  def current_preferences
+    current_staff ? current_staff.preferences : Preferences.new
+  end
 end

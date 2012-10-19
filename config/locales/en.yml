@@ -10,3 +10,10 @@ en:
         zjg: 'ZJG'
         closed: 'Closed'
         state: 'State & Campus'
+  helpers:
+    label:
+      preferences:
+        vote_display: 'Vote count display'
+        editor: 'Topic editor'
+      
+

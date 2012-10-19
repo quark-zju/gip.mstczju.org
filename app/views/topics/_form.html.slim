@@ -1,3 +1,5 @@
+- use_ace = (current_preferences.editor == Preferences::EDITOR_OPTIONS.index(:ACE))
+
 = form_for @topic do |f|
   /- if @topic.errors.any?
     .row
@@ -13,8 +15,9 @@
         = f.text_field :title
       .field
         = f.label :content
+        - if use_ace
+          #aceeditor.hide
         = f.text_area :content
-        #editor
     .two.columns.end
       .field
         = f.label :state
@@ -33,58 +36,60 @@
       .actions
         = f.submit class: 'button'
 
-/ Use ACE editor
-coffee:
-  $ ->
-    textarea = $('#topic_content')
-    textarea.hide()
-    editor = ace.edit('editor')
-    window.editor = editor
-    editor.div = $('#editor')
-    editor.setValue(textarea.val())
-    editor.clearSelection()
-    editor.getSession().on 'change', ->
-      # sync with textarea
-      textarea.val(editor.getValue())
-      # adjust height
-      cells = $('#editor .ace_gutter-cell')
-      lines = (editor.getValue().match(/\n/g)||[]).length + 1
-      height = cells.height() * lines
-      if height != editor.div.height() && lines < 60 && lines > 10
-        editor.div.height(height)
-        editor.resize()
-    # do not steal important keys
-    editor.commands.bindKeys
-      "ctrl-l":null
-      "ctrl-r":null
-      "ctrl-t":null
-      "ctrl-w":null
-    onModeChange = (mode)->
-      nextMode = if mode == '0' 
-                    'ace/mode/markdown'
-                  else
-                    'ace/mode/textile'
-      editor.getSession().setMode(nextMode)
-    textFilter = $('#topic_text_filter')
-    textFilter.change (e)->
-      onModeChange e.target.value
-    onModeChange(textFilter.val())
-
-/ Use CodeMirror editor
-/coffee:
-  $ ->
-    textarea = $('#topic_content')[0]
-    window.editor = CodeMirror.fromTextArea textarea,
-                      matchBrackets: true
-    onModeChange = (mode)->
-      next_mode = if mode == '0' 
-                    'gfm'
-                  else
-                    'htmlmixed'
-      window.editor.setOption('mode', next_mode)
-    textFilter = $('#topic_text_filter')
-    textFilter.change (e)->
-      onModeChange e.target.value
-    onModeChange(textFilter.val())
-
-
+- if use_ace
+  / Use ACE editor
+  script src='http://d1n0x3qji82z53.cloudfront.net/src-min-noconflict/ace.js'
+  coffee:
+    $ ->
+      textarea = $('#topic_content')
+      textarea.hide()
+      editor = ace.edit('aceeditor')
+      window.editor = editor
+      editor.div = $('#aceeditor').show()
+      editor.setValue(textarea.val())
+      editor.clearSelection()
+      editor.getSession().on 'change', ->
+        # sync with textarea
+        textarea.val(editor.getValue())
+        # adjust height
+        cells = $('.ace_gutter-cell', editor.div)
+        lines = (editor.getValue().match(/\n/g)||[]).length + 1
+        height = cells.height() * lines
+        if height != editor.div.height() && lines < 60 && lines > 10
+          editor.div.height(height)
+          editor.resize()
+      # do not steal important keys
+      editor.commands.bindKeys
+        "ctrl-l":null
+        "ctrl-r":null
+        "ctrl-t":null
+        "ctrl-w":null
+      onModeChange = (mode)->
+        nextMode = if mode == '0' 
+                      'ace/mode/markdown'
+                    else
+                      'ace/mode/textile'
+        editor.getSession().setMode(nextMode)
+      textFilter = $('#topic_text_filter')
+      textFilter.change (e)->
+        onModeChange e.target.value
+      onModeChange(textFilter.val())
+  
+  / Use CodeMirror editor
+  /coffee:
+    $ ->
+      textarea = $('#topic_content')[0]
+      window.editor = CodeMirror.fromTextArea textarea,
+                        matchBrackets: true
+      onModeChange = (mode)->
+        next_mode = if mode == '0' 
+                      'gfm'
+                    else
+                      'htmlmixed'
+        window.editor.setOption('mode', next_mode)
+      textFilter = $('#topic_text_filter')
+      textFilter.change (e)->
+        onModeChange e.target.value
+      onModeChange(textFilter.val())
+  
+  

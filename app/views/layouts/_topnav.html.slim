@@ -31,6 +31,7 @@ nav.top-bar.contain-to-gird
         li.has-dropdown
           a = current_staff.name
           ul.dropdown
+            li = link_to 'Preferences', preferences_path
             li = link_to 'Sign out', destroy_staff_session_path, method: :delete
       - else
         li = link_to 'Sign in', new_staff_session_path
