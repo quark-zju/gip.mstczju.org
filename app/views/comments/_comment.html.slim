@@ -7,10 +7,10 @@
         span.name.right = comment.user.name
         br
         - if comment.updated_at > comment.created_at
-          - tip = "Created at: #{l comment.created_at, :format => :short}"
-          small.updated_at.right.has-tip.noradius title="#{tip}" = l comment.updated_at, :format => :short
+          - tip = "Created at: #{ti comment.created_at}"
+          small.updated_at.right.has-tip.noradius title="#{tip}" = ti comment.updated_at
         - else
-          small.updated_at.right = l comment.updated_at, :format => :short
+          small.updated_at.right = ti comment.updated_at
 
     .nine.columns.mobile-three
       == GitHub::Markup.render('comment.md', comment.comment)

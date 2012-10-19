@@ -39,7 +39,7 @@
       p 
         small Updated At
         br
-        = l @topic.updated_at, :format => :short
+        = ti @topic.updated_at
 
 / comments
 - @topic.comments.each do |comment|

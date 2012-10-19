@@ -38,11 +38,11 @@ RailsNew::Application.configure do
 end
 
 # Replace IRB with Pry
-silence_warnings do
-  begin
-    require 'pry'
-    IRB = Pry
-    Pry.config.pager=false
-  rescue LoadError
-  end
-end
+# silence_warnings do
+#   begin
+#     require 'pry'
+#     IRB = Pry
+#     Pry.config.pager=false
+#   rescue LoadError
+#   end
+# end

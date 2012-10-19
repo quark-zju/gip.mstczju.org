@@ -27,4 +27,8 @@ module ApplicationHelper
 
     "<dl class='sub-nav'><dt>#{param.to_s.capitalize}:</dt>#{dd_list.join('&nbsp;')}</dl>".html_safe
   end
+
+  def ti(time)
+    time.localtime.strftime('%y-%m-%d %H:%M')
+  end
 end
