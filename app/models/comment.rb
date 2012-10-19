@@ -22,6 +22,8 @@ class Comment < ActiveRecord::Base
 
   attr_accessible :title, :comment, :user_id, :commentable_type, :commentable_id
 
+  validates_presence_of :comment
+
   # NOTE: install the acts_as_votable plugin if you
   # want user to vote on the quality of comments.
   #acts_as_voteable
