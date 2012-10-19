@@ -45,7 +45,7 @@ class ApplicationController < ActionController::Base
 
   def check_useragent
     if request.user_agent[/MSIE [5-8]\./]
-      flash[:alert] = 'Your browser is not supported. Please use a modern browser.'
+      flash.now[:alert] = 'Your browser is not supported. Please use a modern browser.'
     end
   end
 end
