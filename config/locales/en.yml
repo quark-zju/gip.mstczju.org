@@ -3,3 +3,10 @@
 
 en:
   hello: "Hello world"
+  activerecord:
+    attributes:
+      topic:
+        yq: 'YQ'
+        zjg: 'ZJG'
+        closed: 'Closed'
+        state: 'State & Campus'

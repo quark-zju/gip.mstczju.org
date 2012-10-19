@@ -7,6 +7,7 @@
       .twelve.columns
         article.topic
           h2 = @topic.title
+          = state_labels_for @topic
           .content
             == @topic.markup
     .row.display
@@ -26,8 +27,6 @@
   .two.columns.pull-ten
     h3.right
     .panel
-      p
-        = state_labels_for @topic
       p
         small Voters
         br

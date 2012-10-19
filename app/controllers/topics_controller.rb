@@ -3,7 +3,8 @@ class TopicsController < ApplicationController
   load_and_authorize_resource
 
   def index
-    @topics = @topics.tally.scoped
+    @topics = @topics.filter_by_tags([params[:state] || 'open', params[:campus]].compact).scoped
+    @topics = @topics.sort_by((params[:order] || :updated).to_s)
   end
 
   def show

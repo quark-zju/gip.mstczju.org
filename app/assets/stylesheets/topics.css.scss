@@ -6,7 +6,7 @@
 
 html {
   @media screen {
-    .vote_count {
+    .vote-count {
       padding: ms(0) / $golden;
       margin-top: ms(0);
       background: darken($white, 10%);
@@ -37,11 +37,16 @@ html {
     .comment-body, .topic .content {
       @include resizeHeaders(ms(0));
     }
+
+    .topic-filter {
+      dt, dd a {
+      }
+    }
   }
 
   @include respondTo(smallScreen) {
     // for a compact topic index
-    .vote_count {
+    .vote-count {
       float: right;
       padding: 0;
       margin-top: ms(0) * 0.65;

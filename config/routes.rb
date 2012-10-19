@@ -13,5 +13,5 @@ RailsNew::Application.routes.draw do
 
   devise_for :staffs, :controllers => {sessions: 'sessions'}
 
-  root to: 'topics#index'
+  root to: redirect('/vote/topics')
 end

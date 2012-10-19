@@ -43,4 +43,43 @@ class Topic < ActiveRecord::Base
                end
     GitHub::Markup.render(filename, content)
   end
+
+  # scopes
+  class << self
+
+    def filter_by_tags(tags)
+      without_states = []
+      with_states = []
+
+      tags.each do |word|
+        case word
+        when 'open'
+          without_states << :closed
+        when 'closed'
+          with_states << :closed
+        when 'zjg'
+          with_states << :zjg
+        when 'yq'
+          with_states << :yq
+        end
+      end
+
+      ret = scoped
+      ret = ret.with_state(*with_states) if not with_states.empty?
+      ret = ret.without_state(*without_states) if not without_states.empty?
+      ret
+    end
+
+    def sort_by(tag)
+      tag = tag.to_s.downcase
+      case tag
+      when 'voted'
+        tally
+      when 'updated'
+        order('updated_at DESC')
+      else
+        scoped
+      end.scoped
+    end
+  end
 end
