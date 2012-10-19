@@ -27,10 +27,11 @@
     h3.right
     .panel
       p
+        = state_labels_for @topic
+      p
         small Voters
         br
         = @topic.voters_who_voted.map(&:name).join(', ').presence || @topic.votes_count
-    .panel
       p
         small Author
         br

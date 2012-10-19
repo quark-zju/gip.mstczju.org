@@ -53,6 +53,12 @@ coffee:
       if height != editor.div.height() && lines < 60 && lines > 10
         editor.div.height(height)
         editor.resize()
+    # do not steal important keys
+    editor.commands.bindKeys
+      "ctrl-l":null
+      "ctrl-r":null
+      "ctrl-t":null
+      "ctrl-w":null
     onModeChange = (mode)->
       nextMode = if mode == '0' 
                     'ace/mode/markdown'

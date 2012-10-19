@@ -8,7 +8,7 @@
         br
         - if comment.updated_at > comment.created_at
           - tip = "Created at: #{l comment.created_at, :format => :short}"
-          small.updated_at.right.has-tip title="#{tip}" = l comment.updated_at, :format => :short
+          small.updated_at.right.has-tip.noradius title="#{tip}" = l comment.updated_at, :format => :short
         - else
           small.updated_at.right = l comment.updated_at, :format => :short
 

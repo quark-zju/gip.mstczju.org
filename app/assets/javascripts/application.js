@@ -12,21 +12,45 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require foundation
+//
+//=require foundation/modernizr.foundation
+//=require foundation/jquery.placeholder
+//=require foundation/jquery.foundation.alerts
+// require foundation/jquery.foundation.accordion
+//=require foundation/jquery.foundation.buttons
+//=require foundation/jquery.foundation.tooltips
+//=require foundation/jquery.foundation.forms
+//=require foundation/jquery.foundation.tabs
+//=require foundation/jquery.foundation.navigation
+//=require foundation/jquery.foundation.topbar
+// require foundation/jquery.foundation.reveal
+// require foundation/jquery.foundation.orbit
+//=require foundation/jquery.foundation.mediaQueryToggle
+//
 //= require ace
 //= require mode-markdown
 //= require mode-textile
-/// require codemirror
-/// require codemirror/utils/overlay
-/// require codemirror/modes/xml
-/// require codemirror/modes/javascript
-/// require codemirror/modes/css
-/// require codemirror/modes/clike
-/// require codemirror/modes/ruby
-/// require codemirror/modes/python
-/// require codemirror/modes/haskell
-/// require codemirror/modes/shell
-/// require codemirror/modes/htmlmixed
-/// require codemirror/modes/markdown
-/// require codemirror/modes/gfm
+//
 //= require_tree .
+
+// foundation/{index,app} runs at incorrect time, use own version
+$(function() {
+  var $doc = $(document),
+      Modernizr = window.Modernizr;
+  
+  // Some browser lies about touch (e.g. chrome)
+  Modernizr.touch = false;
+
+  $.fn.foundationAlerts           ? $doc.foundationAlerts() : null;
+  $.fn.foundationButtons          ? $doc.foundationButtons() : null;
+  $.fn.foundationAccordion        ? $doc.foundationAccordion() : null;
+  $.fn.foundationNavigation       ? $doc.foundationNavigation() : null;
+  $.fn.foundationTopBar           ? $doc.foundationTopBar() : null;
+  $.fn.foundationCustomForms      ? $doc.foundationCustomForms() : null;
+  $.fn.foundationMediaQueryViewer ? $doc.foundationMediaQueryViewer() : null;
+  $.fn.foundationTabs             ? $doc.foundationTabs({callback : $.foundation.customForms.appendCustomMarkup}) : null;
+  $.fn.foundationTooltips         ? $doc.foundationTooltips() : null;
+
+  $('input, textarea').placeholder();
+});
+  

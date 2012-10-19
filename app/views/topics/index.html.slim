@@ -18,5 +18,6 @@
       .ten.columns.mobile-three.pull-one-mobile
         article.topic
           h2 = link_to topic.title, topic
+          = state_labels_for topic
           .content.preview.hide-for-small
             == topic.markup

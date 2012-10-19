@@ -1,3 +1,4 @@
+/navbar style
 /.row
   .twelve.columns
     ul.nav-bar
@@ -33,10 +34,3 @@ nav.top-bar.contain-to-gird
             li = link_to 'Sign out', destroy_staff_session_path, method: :delete
       - else
         li = link_to 'Sign in', new_staff_session_path
-
-script
-  | $(function() { 
-      $(document).foundationTopBar();
-      $(document).foundationTopBar();
-    });
-
