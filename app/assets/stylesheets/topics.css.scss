@@ -21,7 +21,7 @@ html {
       min-height: 12em;
     }
 
-    article.topic {
+    .topic {
       .preview {
         max-height: 100px;
         overflow-y: hidden;
@@ -38,10 +38,10 @@ html {
       @include resizeHeaders(ms(0));
     }
 
-    .topic-filter {
-      dt, dd a {
-      }
+    .topic-list h2, .topic > h2 {
+      font-size: ms(0) * 1.6;
     }
+
   }
 
   @include respondTo(smallScreen) {

@@ -13,9 +13,10 @@
     .row.display
       .twelve.columns
         .button-bar
-          - if can? :manage, @topic
-            ul.button-group
+          ul.button-group
+            - if can? :edit, @topic
               li = link_to 'Edit', edit_topic_path(@topic), :class => 'button'
+            - if can? :delete, @topic
               li = link_to 'Delete', @topic, :confirm => 'Are you sure?', :method => :delete, :class => [:button, :alert]
           - if can? :vote, @topic
             ul.button-group

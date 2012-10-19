@@ -6,7 +6,7 @@ class Ability
       can :manage, Topic, :staff_id => user.id
       can :manage, Comment, :user_id => user.id
 
-      can [:vote, :unvote, :comment], Topic
+      can [:vote, :unvote, :comment, :edit], Topic
       cannot [:vote, :unvote], Topic, :staff_id => user.id
 
       can [:read, :create], [Topic, Comment]
