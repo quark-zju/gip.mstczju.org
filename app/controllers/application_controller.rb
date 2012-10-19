@@ -22,8 +22,6 @@ class ApplicationController < ActionController::Base
   def clean_cookies
     # keep only session id cookie
     keep = [Rails.application.config.session_options[:key] || '_session_id']
-    paths = request.path.split('/')[1...-1]
-    paths = paths.inject(['/']) {|s,i| s << "#{s.last}#{i}/"}
 
     # try to delete other cookies
     # to save expensive cernet incoming bandwidth
@@ -33,7 +31,8 @@ class ApplicationController < ActionController::Base
         # Try all possible paths (Firefox requires path to be correct)
         # I haven't found high level to specify same key with different paths.
         # Use low level Rack api here.
-        paths.each do |path|
+        @cookie_paths ||= request.path.split('/')[1...-1].inject(['/']) {|s,i| s << "#{s.last}#{i}/"}
+        @cookie_paths.each do |path|
           Rack::Utils.set_cookie_header! response.header, key, {
             value: '',
             expires: Time.at(0),
