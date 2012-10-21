@@ -18,6 +18,8 @@ RailsNew::Application.routes.draw do
   controller :staffs do
     get :preferences
     post :preferences
+    get :profile
+    put :profile
   end
 
   root to: redirect('/vote/topics')

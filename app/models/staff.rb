@@ -25,7 +25,7 @@ class Staff < ActiveRecord::Base
   attr_accessible :nick, :preferences
   attr_accessible :avatar
 
-  has_attached_file :avatar, :styles => { :medium => "48x48>", :thumb => "16x16>" }, :url => ':rails_root/public/system/:class/:attachment/:id_partition/:style/:filename'
+  has_attached_file :avatar, :styles => { :medium => "60x60>", :icon => "16x16>" }, :default_url => ":attachment/:style/missing.png"
 
   serialize :preferences, Preferences
 

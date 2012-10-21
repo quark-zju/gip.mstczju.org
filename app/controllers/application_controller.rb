@@ -19,6 +19,10 @@ class ApplicationController < ActionController::Base
 
   private
 
+  def requires_login
+    redirect_to new_staff_session_path unless current_staff
+  end
+
   def clean_cookies
     # keep only session id cookie
     keep = [Rails.application.config.session_options[:key] || '_session_id']

@@ -29,8 +29,11 @@ nav.top-bar.contain-to-gird
     ul.right
       - if current_staff
         li.has-dropdown
-          a = current_staff.name
+          a 
+            = image_tag current_staff.avatar.url(:icon), class: 'avatar-icon'
+            = current_staff.name
           ul.dropdown
+            li = link_to 'Profile', profile_path
             li = link_to 'Preferences', preferences_path
             li = link_to 'Sign out', destroy_staff_session_path, method: :delete
       - else

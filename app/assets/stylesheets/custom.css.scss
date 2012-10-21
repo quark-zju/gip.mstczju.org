@@ -27,6 +27,12 @@ html {
       font-size: ms(0) / $golden;
     }
 
+    img.avatar-icon {
+      vertical-align:middle;
+      border: 1px solid darken($white, 8%);
+      margin: ms(0) / 2;
+    }
+
     // ACE Editor border
     .CodeMirror, .ace_editor {
       border: 1px solid darken($white, 20%);
