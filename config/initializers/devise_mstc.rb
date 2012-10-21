@@ -18,7 +18,8 @@ module Devise
                                                 password: password).body)
 
         if result['success'] == true
-          resource = mapping.to.find_by_email(email) || mapping.to.create(email: email, name: result['name'])
+          resource = mapping.to.find_by_email(email) || mapping.to.create_with_email_and_name(email, result['name'])
+          # resource = mapping.to.find_by_email(email) || mapping.to.create(email: email, name: result['name'])
           success!(resource)
         end
       end

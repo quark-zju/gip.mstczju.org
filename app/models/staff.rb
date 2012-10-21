@@ -22,11 +22,12 @@ require 'json'
 class Staff < ActiveRecord::Base
   devise :rememberable, :remote_authenticatable, :trackable
 
-  attr_accessible :email, :remember_me, :nick, :password, :name, :preferences
+  attr_accessible :nick, :preferences
+  attr_accessible :avatar
+
+  has_attached_file :avatar, :styles => { :medium => "48x48>", :thumb => "16x16>" }, :url => ':rails_root/public/system/:class/:attachment/:id_partition/:style/:filename'
 
   serialize :preferences, Preferences
-
-  attr_accessor :password
 
   acts_as_voter
 
@@ -41,5 +42,12 @@ class Staff < ActiveRecord::Base
 
   def self.remote_authenticate_url
     'http://login.mstczju.org/plain'
+  end
+
+  def self.create_with_email_and_name(email, name)
+    r = self.create
+    r.email = email
+    r.name = name
+    r
   end
 end
