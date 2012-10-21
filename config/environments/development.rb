@@ -35,9 +35,19 @@ RailsNew::Application.configure do
   # less annoying assets log
   config.assets.debug = false
   config.assets.logger = nil
+
+  config.after_initialize do
+    next unless defined?(Bullet)
+    Bullet.enable = true
+    Bullet.alert = true
+    Bullet.bullet_logger = true
+    Bullet.console = true
+    Bullet.rails_logger = true
+    Bullet.disable_browser_cache = false
+  end
 end
 
-# Replace IRB with Pry
+# # Replace IRB with Pry
 # silence_warnings do
 #   begin
 #     require 'pry'
