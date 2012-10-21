@@ -2,18 +2,13 @@ module StaffsHelper
 
   def nickname_of(staff, format = :short)
     case format
-    when :long
-      if staff.nick.present?
-        "#{staff.nick} (#{staff.name})"
-      else
-        staff.name
-      end + " <#{staff.email}>"
-    when :medium
-      if staff.nick.present?
-        "#{staff.nick} (#{staff.name})"
-      else
-        staff.name
-      end
+    when :long, :medium
+      medium = if staff.nick.present?
+                 "#{staff.nick} (#{staff.name})"
+               else
+                 staff.name
+               end 
+      format == :long ? medium + " <#{staff.email}>" : medium
     when :name
       staff.name
     when :short
@@ -27,7 +22,9 @@ module StaffsHelper
     has_name = style.to_s.include? 'name'
     has_avatar = style.to_s.include? 'avatar'
     is_list = style.to_s.include? 'list'
+
     image_options = options.merge(class: ['avatar-icon', *options[:class]])
+    image_options[:class] << ['has-tip', 'noradius', 'tip-normal', 'tip-top'] unless has_name
 
     result = [*staffs].map do |staff|
       tip = html_escape(nickname_of(staff, :long))

@@ -29,7 +29,25 @@ html {
 
     img.avatar-icon {
       vertical-align:middle;
-      border: 1px solid darken($white, 8%);
+      border: thin solid darken($white, 8%);
+    }
+
+    /* .has-tip.noradius.tip-normal {
+      font-weight: normal;
+      border-bottom: none;
+      &:hover {
+        cursor: default;
+        img {
+          border: thin solid $mainColor; 
+          border-bottom: thin solid $mainColor;
+        }
+      }
+    } */
+
+    img.has-tip.noradius:hover {
+      cursor: default;
+      border: thin solid $mainColor; 
+      border-bottom: thin solid $mainColor;
     }
 
     .top-bar img.avatar-icon {
@@ -38,10 +56,6 @@ html {
     
     .name.right img.avatar-icon {
       margin-left: ms(0) / 3;
-    }
-
-    .panel .has-tip {
-      border-bottom: none;
     }
 
     // ACE Editor border
