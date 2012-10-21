@@ -23,19 +23,20 @@ module StaffsHelper
     end
   end
 
-  def avatar_of(staffs, style = :avatar_only)
+  def avatar_of(staffs, style = :avatar_only, options = {})
     has_name = style.to_s.include? 'name'
     has_avatar = style.to_s.include? 'avatar'
     is_list = style.to_s.include? 'list'
+    image_options = options.merge(class: ['avatar-icon', *options[:class]])
 
     result = [*staffs].map do |staff|
       tip = html_escape(nickname_of(staff, :long))
 
       if has_name
-        avatar = image_tag staff.avatar.url(:icon), class: ['avatar-icon']
+        avatar = image_tag staff.avatar.url(:icon), image_options
         name = "<span#{is_list ? '' : " title='#{tip}'"}>#{html_escape nickname_of(staff)}</span>"
       else
-        avatar = image_tag staff.avatar.url(:icon), class: ['avatar-icon'], title: tip
+        avatar = image_tag staff.avatar.url(:icon), image_options.merge(title: tip)
       end
 
       case style

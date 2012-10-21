@@ -14,16 +14,14 @@
       .row
         .three.columns.mobile-one.push-three-mobile
           .right.listeners.avatars.hide-for-small
-            == avatar_of topic.listeners
+            == avatar_of topic.listeners, :avatar_only, class: ['right']
           .right.lecturers.avatars.hide-for-small
-            == avatar_of topic.lecturers
+            == avatar_of topic.lecturers, :avatar_only, class: ['right']
           .right.vote-count.show-for-small
             - if use_zheng
               span.right = count_as_zheng(topic.listener_count)
             - else
               span.right = topic.listener_count
-            /br
-            /small.right.hide-for-small Voted
         .nine.columns.mobile-three.pull-one-mobile
           article.topic
             h2 = link_to topic.title, topic
