@@ -35,7 +35,8 @@ coffee:
       if value.indexOf('.') < 0
         names = PINYIN_NAME_REGEX.exec(e.target.value)
         if names
-          value = "#{names[2]}.#{names[1]}#{names[3]}"
+          # zhangchi3 => chi3.zhang
+          value = "#{names[2]}#{names[3]}.#{names[1]}"
       if value.indexOf('.') >= 0 && value.indexOf('@') < 0
         value += window.emailPostfix
       if value != e.target.value
