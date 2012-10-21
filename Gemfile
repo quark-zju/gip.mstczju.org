@@ -17,7 +17,7 @@ else
   gem 'rrails'
 end
 
-gem 'thumbs_up'
+# gem 'thumbs_up'
 gem 'acts_as_commentable'
 
 # gem 'bj'
@@ -30,15 +30,16 @@ gem 'bitmask_attributes'
 # gem 'pry-debugger'
 # gem 'debugger'
 gem 'RedCloth'
-gem 'bullet'
 gem 'paperclip'
+# gem 'active_decorator'
+# gem 'draper'
 # gem 'ace-rails-ap'
 # gem 'codemirror-rails'
 gem 'redcarpet'
 gem 'devise'
 gem 'devise-i18n'
 gem 'cancan'
-gem 'gravatar_image_tag'
+# gem 'gravatar_image_tag'
 gem 'github-markup'
 # gem 'opinio'
 # gem 'coderay'
@@ -65,6 +66,7 @@ group :development do
   gem 'pry'
   gem 'annotate'
   gem 'warbler', platforms: [:jruby], require: false
+  gem 'bullet'
   # gem 'rack-webconsole'
 end
 

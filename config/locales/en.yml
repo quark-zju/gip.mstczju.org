@@ -10,6 +10,8 @@ en:
         zjg: 'ZJG'
         closed: 'Closed'
         state: 'State & Campus'
+      staff:
+        nick: 'Nickname'
   helpers:
     label:
       preferences:

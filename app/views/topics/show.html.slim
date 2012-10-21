@@ -7,9 +7,9 @@
       .twelve.columns
         article.topic
           h2 = @topic.title
-          = state_labels_for @topic
+          = state_labels_of @topic
           .content
-            == @topic.markup
+            == content_html_of(@topic)
     .row.display
       .twelve.columns
         .button-bar
@@ -18,31 +18,39 @@
               li = link_to 'Edit', edit_topic_path(@topic), :class => 'button'
             - if can? :delete, @topic
               li = link_to 'Delete', @topic, :confirm => 'Are you sure?', :method => :delete, :class => [:button, :alert]
-          - if can? :vote, @topic
+          - if can? :register, @topic
             ul.button-group
-              - voted = @topic.voted_by?(current_staff)
-              li = link_to 'Vote', vote_topic_path(@topic), :method => :post, :class => [:button, *(voted ? :disabled : nil)]
-              li = link_to 'Unvote', unvote_topic_path(@topic), :method => :post, :class => [:button, *(voted ? nil : :disabled)]
+              - if @topic.listeners.include?(current_staff)
+                li = link_to 'Won\'t listen', register_topic_path(@topic, :do => 'listeners_delete'), :method => :post, :class => [:button]
+              - else
+                li = link_to 'Will listen', register_topic_path(@topic, :do => 'listeners_push'), :method => :post, :class => [:button]
+              - if @topic.lecturers.include?(current_staff)
+                li = link_to 'Won\'t talk', register_topic_path(@topic, :do => 'lecturers_delete'), :method => :post, :class => [:button]
+              - else
+                li = link_to 'Will talk', register_topic_path(@topic, :do => 'lecturers_push'), :method => :post, :class => [:button]
 
   / left sidebar
-  .two.columns.pull-ten
+  .two.columns.pull-ten.topic-information
     h3.right
     .panel
-      p
-        small Voters
-        br
-        = @topic.voters_who_voted.map(&:name).join(', ').presence || @topic.votes_count
-      p
-        small Author
-        br
-        = @topic.staff.name
-      p 
-        small Updated At
+      - if @topic.listener_count > 0
+        div.listeners
+          small Listeners
+          == avatar_of @topic.listeners, :avatar_and_name_list
+      - if @topic.lecturer_count > 0
+        div.lecturers
+          small Lecturers
+          == avatar_of @topic.lecturers, :avatar_and_name_list
+      div.name
+        small Created by
+        == avatar_of @topic.staff, :avatar_and_name_list
+      div
+        small Updated at
         br
         = ti @topic.updated_at
 
 / comments
-- @topic.comments.each do |comment|
+- @topic.comments.includes(:user).each do |comment|
   == render comment
 
 - if can? :comment, @topic

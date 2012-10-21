@@ -29,8 +29,6 @@ class Staff < ActiveRecord::Base
 
   serialize :preferences, Preferences
 
-  acts_as_voter
-
   def to_s
     name.presence || nick.presence || email.gsub(/@.*$/, '')
   end
@@ -50,4 +48,5 @@ class Staff < ActiveRecord::Base
     r.name = name
     r
   end
+
 end

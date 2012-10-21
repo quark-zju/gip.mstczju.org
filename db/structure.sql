@@ -18,6 +18,8 @@ CREATE INDEX "index_sessions_on_session_id" ON "sessions" ("session_id");
 CREATE INDEX "index_sessions_on_updated_at" ON "sessions" ("updated_at");
 CREATE UNIQUE INDEX "index_staffs_on_email" ON "staffs" ("email");
 CREATE INDEX "index_topics_on_category_id" ON "topics" ("category_id");
+CREATE INDEX "index_topics_on_lecturer_count" ON "topics" ("lecturer_count");
+CREATE INDEX "index_topics_on_listener_count" ON "topics" ("listener_count");
 CREATE INDEX "index_topics_on_staff_id" ON "topics" ("staff_id");
 CREATE INDEX "index_topics_on_title" ON "topics" ("title");
 CREATE INDEX "index_votes_on_voteable_id_and_voteable_type" ON "votes" ("voteable_id", "voteable_type");

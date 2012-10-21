@@ -30,7 +30,18 @@ html {
     img.avatar-icon {
       vertical-align:middle;
       border: 1px solid darken($white, 8%);
+    }
+
+    .top-bar img.avatar-icon {
       margin: ms(0) / 2;
+    }
+    
+    .name.right img.avatar-icon {
+      margin-left: ms(0) / 3;
+    }
+
+    .panel .has-tip {
+      border-bottom: none;
     }
 
     // ACE Editor border

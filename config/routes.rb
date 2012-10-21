@@ -5,8 +5,7 @@ RailsNew::Application.routes.draw do
   scope '/vote' do
     resources :topics do
       member do
-        post :vote
-        post :unvote
+        post :register
       end
     end
 

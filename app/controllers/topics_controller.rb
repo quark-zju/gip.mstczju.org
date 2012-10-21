@@ -1,13 +1,16 @@
 class TopicsController < ApplicationController
 
-  load_and_authorize_resource
+  load_resource :except => [:index, :show]
+  authorize_resource
 
   def index
-    @topics = @topics.filter_by_tags([params[:state] || 'open', params[:campus]].compact).scoped
+    @topics = Topic.includes([:listeners,:lecturers]).filter_by_tags([params[:state] || 'open', params[:campus]].compact).scoped
     @topics = @topics.sort_by((params[:order] || :updated).to_s)
   end
 
   def show
+    # includes([:listeners,:lecturers,:comments])
+    @topic = Topic.find(params[:id])
   end
 
   def create
@@ -28,13 +31,15 @@ class TopicsController < ApplicationController
     save('delete') { @topic.destroy }
   end
 
-  def vote
-    current_staff.vote_for(@topic)
-    redirect_to :back
-  end
+  def register
+    collection, method = params[:do].split('_')
 
-  def unvote
-    current_staff.unvote_for(@topic)
+    if ['push', 'delete'].include?(method) && ['lecturers', 'listeners'].include?(collection)
+      @topic.send(collection).send(method, current_staff)
+    else
+      raise RuntimeError.new("Unknown register action")
+    end
+
     redirect_to :back
   end
 

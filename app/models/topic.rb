@@ -24,13 +24,11 @@ class Topic < ActiveRecord::Base
       :join_table => people,
       :class_name => :Staff,
       :uniq => true,
-      :select => [:id, :name, :nick, :avatar_file_name, :avatar_updated_at].map { |s| "\"staffs\".\"#{s}\"" },
-      :after_add => "update_count_of_#{people}",
-      :after_remove => "update_count_of_#{people}"
+      :select => [:id, :name, :email, :nick, :avatar_file_name, :avatar_updated_at].map { |s| "\"staffs\".\"#{s}\"" },
+      :after_add => "update_count_of_#{people}".to_sym,
+      :after_remove => "update_count_of_#{people}".to_sym
   end
 
-  # deprecated, use listeners and lecturers instead
-  # acts_as_voteable
   acts_as_commentable
 
   TEXT_FILTER_LIST = [:markdown, :textile]
@@ -43,16 +41,6 @@ class Topic < ActiveRecord::Base
   STATES.each do |st|
     define_method(st) { state.include? st }
     define_method("#{st}=") { |x| x && x.to_s != '0' ? (state << st) : state.delete(st) }
-  end
-
-  def markup
-    filename = case text_filter
-               when 0
-                 'topic.md'
-               when 1
-                 'topic.textile'
-               end
-    GitHub::Markup.render(filename, content)
   end
 
   # scopes
@@ -84,12 +72,14 @@ class Topic < ActiveRecord::Base
     def sort_by(tag)
       tag = tag.to_s.downcase
       case tag
-      when 'voted'
-        tally
+      when 'voted', 'listeners'
+        order('listener_count DESC')
+      when 'lecturers'
+        order('lecturer_count DESC')
       when 'updated'
         order('updated_at DESC')
       else
-        scoped
+        self
       end.scoped
     end
   end

@@ -8,6 +8,12 @@ class CreateLecturersAndListeners < ActiveRecord::Migration
       t.integer :listener_count, null: false, default: 0
     end
 
+    change_table :topics do |t|
+      # for quick sorting
+      t.index :lecturer_count
+      t.index :listener_count
+    end
+
     [:lecturers, :listeners].each do |name|
       create_table(name) do |t|
         t.references :staff, null: false

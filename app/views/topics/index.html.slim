@@ -6,29 +6,34 @@
       dd 
         a By Update Date
 - content_for(:title) { 'Vote::Topic::Index' }
+- use_zheng = current_staff.preferences.try { |p| p.vote_display == Preferences::VOTE_DISPLAY_OPTIONS.index(:Zheng) }
 
 .row
   .eight.columns.topic-list
     - @topics.each do |topic|
       .row
         .three.columns.mobile-one.push-three-mobile
-          .right.vote-count
-            - if current_preferences.vote_display == Preferences::VOTE_DISPLAY_OPTIONS.index(:Zheng)
-              span.right = count_as_zheng(topic.votes_count)
+          .right.listeners.avatars.hide-for-small
+            == avatar_of topic.listeners
+          .right.lecturers.avatars.hide-for-small
+            == avatar_of topic.lecturers
+          .right.vote-count.show-for-small
+            - if use_zheng
+              span.right = count_as_zheng(topic.listener_count)
             - else
-              span.right = topic.votes_count
+              span.right = topic.listener_count
             /br
             /small.right.hide-for-small Voted
         .nine.columns.mobile-three.pull-one-mobile
           article.topic
             h2 = link_to topic.title, topic
             .tags.hide-for-small
-              = state_labels_for topic
+              = state_labels_of topic
             .content.preview.hide-for-small
-              p == topic.markup.gsub(/<[a-z1-9\/ ]*?>/, '').truncate(256)
+              p == content_html_of(topic).gsub(/<[a-z1-9\/ ]*?>/, '').truncate(256)
   .four.columns.topic-filter.hide-for-small
     .panel
       = subnav :campus, ['Any', 'ZJG', 'YQ'], topics_path, :any
       = subnav :state, ['All', 'Open', 'Closed'], topics_path, :open
-      = subnav :order, ['Voted', 'Updated'], topics_path, :updated
+      = subnav :order, ['Listeners', 'Lecturers', 'Updated'], topics_path, :updated
   

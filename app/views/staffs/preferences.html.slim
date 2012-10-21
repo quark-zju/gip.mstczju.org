@@ -7,12 +7,12 @@
     = form_for(@preferences, url: preferences_path) do |f|
       .fields
         .field
-          = f.label :vote_display
-          = f.select :vote_display, Preferences::VOTE_DISPLAY_OPTIONS.map.with_index.to_a
-        br
-        .field
           = f.label :editor
           = f.select :editor, Preferences::EDITOR_OPTIONS.map.with_index.to_a
+        br
+        .field
+          = f.label :vote_display
+          = f.select :vote_display, Preferences::VOTE_DISPLAY_OPTIONS.map.with_index.to_a
       hr
       .actions
         = f.submit 'Save', class: 'button'

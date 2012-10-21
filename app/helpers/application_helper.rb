@@ -1,9 +1,8 @@
 # encoding: utf-8
 
 module ApplicationHelper
-  def markup(content, filename='topic.markdown')
-    GitHub::Markup.render(filename, content)
-  end
+
+  include StaffsHelper # for topnav to use nickname
 
   def count_as_zheng(count)
     i = count.to_i
@@ -36,7 +35,4 @@ module ApplicationHelper
     form.select field, options_for_select(list.map.with_index.to_a), *options
   end
 
-  def current_preferences
-    current_staff ? current_staff.preferences : Preferences.new
-  end
 end

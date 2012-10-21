@@ -1,4 +1,4 @@
-- use_ace = (current_preferences.editor == Preferences::EDITOR_OPTIONS.index(:ACE))
+- use_ace = (current_staff.preferences.try { |p| p.editor == Preferences::EDITOR_OPTIONS.index(:ACE) })
 
 = form_for @topic do |f|
   /- if @topic.errors.any?

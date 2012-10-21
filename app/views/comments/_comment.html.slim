@@ -4,7 +4,8 @@
   .row.comment-body class="comment-#{comment.id}-body"
     .two.columns.mobile-one
       p
-        span.name.right = comment.user.name
+        span.name.right
+          == avatar_of comment.user, :name_and_avatar
         br
         - if comment.updated_at > comment.created_at
           - tip = "Created at: #{ti comment.created_at}"
@@ -22,7 +23,8 @@
   .row.comment-edit class="comment-#{comment.id}-edit #{hide_edit && 'hide'}"
     .two.columns.hide-for-small
       p
-        span.name.right = comment.user.name
+        span.name.right
+          == avatar_of comment.user, :name_and_avatar
     .nine.columns
       == render :partial => 'comments/form', :locals => { :comment => comment }
     .one.column
