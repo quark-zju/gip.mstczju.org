@@ -5,21 +5,21 @@
     h2 Sign in
     = form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f|
       .field.row
-        .two.columns.mobile-one
+        .three.columns.mobile-one
           = f.label :email, :class => [:right, :inline]
-        .ten.columns.mobile-three
+        .nine.columns.mobile-three
           = f.email_field :email, :placeholder => "ming.xing", :autofocus => 'autofocus' 
       .field.row
-        .two.columns.mobile-one
+        .three.columns.mobile-one
           = f.label :password, :class => [:right, :inline]
-        .ten.columns.mobile-three
+        .nine.columns.mobile-three
           = f.password_field :password, :placeholder => 'passowrd'
       - if devise_mapping.rememberable?
         = f.hidden_field :remember_me, :value => true
       .actions
         .row
-          .two.columns
-          .ten.columns
+          .three.columns
+          .nine.columns
             = f.submit "Sign in", :class => [:button]
 
 script
