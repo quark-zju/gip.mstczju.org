@@ -19,7 +19,18 @@ class Topic < ActiveRecord::Base
   validates_uniqueness_of :title
   validates_presence_of :title
 
-  acts_as_voteable
+  [:listeners, :lecturers].each do |people|
+    has_and_belongs_to_many people,
+      :join_table => people,
+      :class_name => :Staff,
+      :uniq => true,
+      :select => [:id, :name, :nick, :avatar_file_name, :avatar_updated_at].map { |s| "\"staffs\".\"#{s}\"" },
+      :after_add => "update_count_of_#{people}",
+      :after_remove => "update_count_of_#{people}"
+  end
+
+  # deprecated, use listeners and lecturers instead
+  # acts_as_voteable
   acts_as_commentable
 
   TEXT_FILTER_LIST = [:markdown, :textile]
@@ -82,4 +93,16 @@ class Topic < ActiveRecord::Base
       end.scoped
     end
   end
+
+  private
+
+  def update_count_of_listeners(listener)
+    update_column :listener_count, listeners.count
+  end
+
+  def update_count_of_lecturers(lecturer)
+    update_column :lecturer_count, lecturers.count
+  end
+
 end
+
