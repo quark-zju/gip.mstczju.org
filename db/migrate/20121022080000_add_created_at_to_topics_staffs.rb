@@ -10,9 +10,9 @@ class AddCreatedAtToTopicsStaffs < ActiveRecord::Migration
       # SQLite3::SQLException: no such column: listeners.created_at: SELECT "staffs"."id", "staffs"."name", "staffs"."email", "staffs"."nick", "staffs"."avatar_file_name", "staffs"."avatar_updated_at", "t0"."topic_id" AS ar_association_key_name FROM "staffs" INNER JOIN "listeners" "t0" ON "staffs"."id" = "t0"."staff_id" WHERE "t0"."topic_id" IN (30, 20, 7, 23, 31, 29, 21, 24, 12, 17, 19, 11, 13, 15, 8, 27, 28, 26, 25, 18) ORDER BY "listeners"."created_at" ASC
 
       # create temperatory table and copy, drop, rename
-      execute <<"EOS"
-CREATE TABLE "#{name}_temp" ("staff_id" integer NOT NULL, "topic_id" integer NOT NULL, "relation_created_at" DATETIME DEFAULT CURRENT_TIMESTAMP)
-EOS
+      execute <<-"EOS"
+CREATE TABLE #{name}_temp (staff_id integer NOT NULL, topic_id integer NOT NULL, relation_created_at DATETIME DEFAULT CURRENT_TIMESTAMP)
+      EOS
 
       # copy content of old table
       execute "INSERT INTO #{name}_temp (staff_id, topic_id) SELECT staff_id, topic_id FROM #{name}"
