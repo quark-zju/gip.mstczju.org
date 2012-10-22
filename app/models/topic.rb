@@ -24,8 +24,8 @@ class Topic < ActiveRecord::Base
       :join_table => people,
       :class_name => :Staff,
       :uniq => true,
-      :order => "\"#{people}\".\"created_at\" ASC",
-      :select => ["\"#{people}\".\"created_at\"", *([:id, :name, :email, :nick, :avatar_file_name, :avatar_updated_at].map { |s| "\"staffs\".\"#{s}\"" })],
+      :order => "\"relation_created_at\" ASC",
+      :select => [:id, :name, :email, :nick, :avatar_file_name, :avatar_updated_at].map { |s| "\"staffs\".\"#{s}\"" },
       :after_add => "update_count_of_#{people}".to_sym,
       :after_remove => "update_count_of_#{people}".to_sym
   end
