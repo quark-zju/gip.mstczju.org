@@ -11,7 +11,7 @@ gem 'thin', platforms: :mri
 gem 'puma', platforms: [:rbx, :jruby]
 gem 'jruby-openssl', platforms: :jruby
 gem 'activerecord-jdbcpostgresql-adapter', platforms: :jruby
-gem 'rrails'
+# gem 'rrails'
 
 # gem 'thumbs_up'
 gem 'acts_as_commentable'
