@@ -28,7 +28,7 @@
             .tags.hide-for-small
               = state_labels_of topic
             .content.preview.hide-for-small
-              p == content_html_of(topic).gsub(/<[a-z1-9\/ ]*?>/, '').truncate(256)
+              p == sanitize(content_html_of(topic), tags: '').truncate(256)
   .four.columns.topic-filter.hide-for-small
     .panel
       = subnav :campus, ['Any', 'ZJG', 'YQ'], topics_path, :any
