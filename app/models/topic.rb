@@ -20,7 +20,7 @@ class Topic < ActiveRecord::Base
   validates_presence_of :title
 
   [:listeners, :lecturers].each do |people|
-    q = ActiveRecord::Base.connection.method(:quote)
+    q = ActiveRecord::Base.connection.method(:quote_column_name)
     has_and_belongs_to_many people,
       :join_table => people,
       :class_name => :Staff,
