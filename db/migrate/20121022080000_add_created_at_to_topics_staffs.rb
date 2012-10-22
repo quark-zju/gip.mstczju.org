@@ -2,6 +2,13 @@ class AddCreatedAtToTopicsStaffs < ActiveRecord::Migration
 
   def up
     [:listeners, :lecturers].each do |name|
+      case ActiveRecord::Base.connection.adapter_name
+      when /Mysql/i
+        datetime_type = 'timestamp'
+      else
+        datetime_type = 'datetime'
+      end
+
       # SQLite does not support alter column default value
       # and can not add column with CURRENT_TIMESTAMP as default.
 
@@ -11,7 +18,7 @@ class AddCreatedAtToTopicsStaffs < ActiveRecord::Migration
 
       # create temperatory table and copy, drop, rename
       execute <<-"EOS"
-CREATE TABLE #{name}_temp (staff_id integer NOT NULL, topic_id integer NOT NULL, relation_created_at DATETIME DEFAULT CURRENT_TIMESTAMP)
+CREATE TABLE #{name}_temp (staff_id integer NOT NULL, topic_id integer NOT NULL, relation_created_at #{datetime_type} DEFAULT CURRENT_TIMESTAMP)
       EOS
 
       # copy content of old table
