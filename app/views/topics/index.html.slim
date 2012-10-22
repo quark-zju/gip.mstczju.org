@@ -30,7 +30,7 @@
               = link_to topic.title, topic
             .content.preview.hide-for-small
               p == sanitize(content_html_of(topic), tags: '').truncate(256)
-  .four.columns.topic-filter.hide-for-medium-down
+  .four.columns.topic-filter.hide-for-small
     .panel
       = subnav :campus, ['Any', 'ZJG', 'YQ'], topics_path, :any
       = subnav :state, ['All', 'Open', 'Closed'], topics_path, :open
