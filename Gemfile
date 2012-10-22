@@ -17,7 +17,7 @@ gem 'rrails'
 gem 'acts_as_commentable'
 
 # gem 'bj'
-# gem 'mysql2', platforms: :mri
+gem 'mysql2', platforms: :mri
 # gem 'unicorn', platforms: :mri
 # gem 'pg', platforms: :mri
 # gem 'jbuilder'
