@@ -11,11 +11,7 @@ gem 'thin', platforms: :mri
 gem 'puma', platforms: [:rbx, :jruby]
 gem 'jruby-openssl', platforms: :jruby
 gem 'activerecord-jdbcpostgresql-adapter', platforms: :jruby
-if Dir.exists? '/home/quark/src/github/quark-zju/rrails'
-  gem 'rrails', path: '/home/quark/src/github/quark-zju/rrails'
-else
-  gem 'rrails'
-end
+gem 'rrails'
 
 # gem 'thumbs_up'
 gem 'acts_as_commentable'
@@ -52,6 +48,9 @@ gem 'github-markup'
 # gem 'term-ansicolor', require: false
 # gem 'rack-webconsole', require: false
 # gem 'awesome_print', require: false
+# gem 'omniauth'
+# gem 'google-api-client'
+# gem 'omniauth-google-oauth2'
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
@@ -67,6 +66,7 @@ group :development do
   gem 'annotate'
   gem 'warbler', platforms: [:jruby], require: false
   gem 'bullet'
+  gem 'yaml_db'
   # gem 'rack-webconsole'
 end
 

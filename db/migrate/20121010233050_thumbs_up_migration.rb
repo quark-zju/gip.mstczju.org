@@ -1,5 +1,7 @@
 class ThumbsUpMigration < ActiveRecord::Migration
   def self.up
+    return unless defined?(ThumbsUp)
+
     create_table :votes, :force => true do |t|
 
       t.boolean    :vote,     :default => false,    :null => false
@@ -19,6 +21,8 @@ class ThumbsUpMigration < ActiveRecord::Migration
   end
 
   def self.down
+    return unless defined?(ThumbsUp)
+
     drop_table :votes
   end
 
