@@ -2,8 +2,14 @@
 
 // Settings file containing Foundation defaults
 
+// Media Queries
+$screenSmall: 639px;
+$screenMedium: 639px; // No medium
+$screenXlarge: 1441px;
+
 // Grid Settings
 
+// fluid more wide
 $rowWidth: 1800px;
 // $columnGutter: 30px;
 // $totalColumns: 12;
@@ -102,7 +108,7 @@ $buttonRadius: 0px;
 // $topBarLinkSize: ms(0) - 1;
 // $topBarDropToggleSize: 5px;
 // $topBarSearchWidth: 200px;
-// $topBarBreakPoint: 940px; // Change to 9999px for always mobile layout
+$topBarBreakPoint: $screenSmall; // Change to 9999px for always mobile layout
 // $topBarNavToggleSize: 8px;
 
 // Other imports

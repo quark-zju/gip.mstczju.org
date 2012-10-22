@@ -24,12 +24,13 @@
               span.right = topic.listener_count
         .nine.columns.mobile-three.pull-one-mobile
           article.topic
-            h2 = link_to topic.title, topic
-            .tags.hide-for-small
-              = state_labels_of topic
+            h2 
+              .tags.right.hide-for-small
+                = state_labels_of topic
+              = link_to topic.title, topic
             .content.preview.hide-for-small
               p == sanitize(content_html_of(topic), tags: '').truncate(256)
-  .four.columns.topic-filter.hide-for-small
+  .four.columns.topic-filter.hide-for-medium-down
     .panel
       = subnav :campus, ['Any', 'ZJG', 'YQ'], topics_path, :any
       = subnav :state, ['All', 'Open', 'Closed'], topics_path, :open

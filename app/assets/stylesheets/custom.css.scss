@@ -4,6 +4,11 @@
 // overwrite foundation badness
 html {
   @media screen {
+    body {
+      // workaround topnav dropdown 1px issue
+      overflow-x: hidden;
+    }
+
     textarea {
       resize: none;
     }
@@ -53,7 +58,7 @@ html {
     }
 
     .top-bar img.avatar-icon {
-      margin: ms(0) / 2;
+      margin-right: ms(0) / 2;
     }
     
     .name.right img.avatar-icon {
