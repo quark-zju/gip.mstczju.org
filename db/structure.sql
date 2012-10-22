@@ -24,6 +24,7 @@ CREATE INDEX "index_topics_on_lecturer_count" ON "topics" ("lecturer_count");
 CREATE INDEX "index_topics_on_listener_count" ON "topics" ("listener_count");
 CREATE INDEX "index_topics_on_staff_id" ON "topics" ("staff_id");
 CREATE INDEX "index_topics_on_title" ON "topics" ("title");
+CREATE INDEX "index_topics_on_updated_at" ON "topics" ("updated_at");
 CREATE INDEX "index_votes_on_voteable_id_and_voteable_type" ON "votes" ("voteable_id", "voteable_type");
 CREATE INDEX "index_votes_on_voter_id_and_voter_type" ON "votes" ("voter_id", "voter_type");
 CREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version");
@@ -50,3 +51,5 @@ INSERT INTO schema_migrations (version) VALUES ('20121021173916');
 INSERT INTO schema_migrations (version) VALUES ('20121022070448');
 
 INSERT INTO schema_migrations (version) VALUES ('20121022070753');
+
+INSERT INTO schema_migrations (version) VALUES ('20121022073538');
