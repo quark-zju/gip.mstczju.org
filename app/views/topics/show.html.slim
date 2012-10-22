@@ -6,8 +6,10 @@
     .row.display
       .twelve.columns
         article.topic
-          h2 = @topic.title
-          = state_labels_of @topic
+          h2
+            = @topic.title
+            br
+            = state_labels_of @topic
           .content
             == content_html_of(@topic)
     .row.display
