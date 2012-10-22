@@ -21,15 +21,15 @@
             - if use_zheng
               span.right = count_as_zheng(topic.listener_count)
             - else
-              span.right = topic.listener_count
+              span.right == topic.listener_count
         .nine.columns.mobile-three.pull-one-mobile
           article.topic
             h2 
               .tags.right.hide-for-small
-                = state_labels_of topic
+                == state_labels_of topic
               = link_to topic.title, topic
             .content.preview.hide-for-small
-              p == sanitize(content_html_of(topic), tags: '').truncate(256)
+              p == content_preview_of(topic)
   .four.columns.topic-filter.hide-for-small
     .panel
       = subnav :campus, ['Any', 'ZJG', 'YQ'], topics_path, :any

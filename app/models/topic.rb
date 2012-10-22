@@ -40,6 +40,8 @@ class Topic < ActiveRecord::Base
 
   attr_accessible :content, :title, :state, :text_filter, *STATES
 
+  before_save :clean_content_preview
+
   STATES.each do |st|
     define_method(st) { state.include? st }
     define_method("#{st}=") { |x| x && x.to_s != '0' ? (state << st) : state.delete(st) }
@@ -94,6 +96,10 @@ class Topic < ActiveRecord::Base
 
   def update_count_of_lecturers(lecturer)
     update_column :lecturer_count, lecturers.count
+  end
+
+  def clean_content_preview
+    update_column :content_preview, ''
   end
 
 end

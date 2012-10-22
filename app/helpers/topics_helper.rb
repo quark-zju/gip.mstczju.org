@@ -28,4 +28,15 @@ module TopicsHelper
     GitHub::Markup.render(filename, topic.content)
   end
 
+  def content_preview_of(topic)
+    cached = topic.content_preview.presence
+    if cached.present?
+      cached
+    else
+      # calc content preview on demand
+      preview = sanitize(content_html_of(topic), tags: '').truncate(400).gsub(/\s+/, ' ')
+      topic.update_column :content_preview, preview
+      preview
+    end.html_safe
+  end
 end
