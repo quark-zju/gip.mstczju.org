@@ -20,12 +20,13 @@ class Topic < ActiveRecord::Base
   validates_presence_of :title
 
   [:listeners, :lecturers].each do |people|
+    q = ActiveRecord::Base.connection.method(:quote)
     has_and_belongs_to_many people,
       :join_table => people,
       :class_name => :Staff,
       :uniq => true,
-      :order => "\"relation_created_at\" ASC",
-      :select => [:id, :name, :email, :nick, :avatar_file_name, :avatar_updated_at].map { |s| "\"staffs\".\"#{s}\"" },
+      :order => "#{q['relation_created_at']} ASC",
+      :select => [:id, :name, :email, :nick, :avatar_file_name, :avatar_updated_at].map { |s| "#{q['staffs']}.#{q[s]}" },
       :after_add => "update_count_of_#{people}".to_sym,
       :after_remove => "update_count_of_#{people}".to_sym
   end
