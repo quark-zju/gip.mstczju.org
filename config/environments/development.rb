@@ -36,6 +36,9 @@ RailsNew::Application.configure do
   config.assets.debug = false
   config.assets.logger = nil
 
+  # need caching
+  config.action_controller.perform_caching = true
+
   config.after_initialize do
     next unless defined?(Bullet)
     Bullet.enable = true

@@ -3,6 +3,9 @@ class TopicsController < ApplicationController
   load_resource :except => [:index, :show]
   authorize_resource
 
+  # caches_action :index, :show
+  # expire_action :index, :show
+
   def index
     @topics = Topic.includes([:listeners,:lecturers]).filter_by_tags([params[:state] || 'open', params[:campus]].compact).scoped
     @topics = @topics.sort_by((params[:order] || :updated).to_s)

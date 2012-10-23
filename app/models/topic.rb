@@ -99,7 +99,7 @@ class Topic < ActiveRecord::Base
   end
 
   def clean_content_preview
-    update_column :content_preview, ''
+    update_column :content_preview, '' if persisted?
   end
 
 end
