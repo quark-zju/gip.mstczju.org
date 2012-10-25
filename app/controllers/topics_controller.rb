@@ -3,9 +3,6 @@ class TopicsController < ApplicationController
   load_resource :except => [:index, :show]
   authorize_resource
 
-  # caches_action :index, :show
-  # expire_action :index, :show
-
   def index
     @topics = Topic.includes([:listeners,:lecturers]).filter_by_tags([params[:state] || 'open', params[:campus]].compact).scoped
     @topics = @topics.sort_by((params[:order] || :updated).to_s)
@@ -39,6 +36,7 @@ class TopicsController < ApplicationController
 
     if ['push', 'delete'].include?(method) && ['lecturers', 'listeners'].include?(collection)
       @topic.send(collection).send(method, current_staff)
+      expire_cache
     else
       raise RuntimeError.new("Unknown register action")
     end
@@ -50,6 +48,8 @@ class TopicsController < ApplicationController
 
   def save(op, view=nil)
     if yield 
+      # expire index page preview
+      expire_cache
       redirect_to @topic
     else
       notice = "Failed to #{op} topic"
@@ -60,6 +60,11 @@ class TopicsController < ApplicationController
         redirect_to :back, :notice => notice
       end
     end
+  end
+
+  def expire_cache
+    # expire index page preview
+    expire_fragment(:controller => 'topics', :action => 'index', :id => @topic.id)
   end
 
 end

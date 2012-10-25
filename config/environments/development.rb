@@ -41,7 +41,7 @@ RailsNew::Application.configure do
 
   config.after_initialize do
     next unless defined?(Bullet)
-    Bullet.enable = true
+    Bullet.enable = false
     Bullet.alert = false
     Bullet.bullet_logger = true
     Bullet.console = true
