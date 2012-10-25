@@ -35,7 +35,8 @@ class ApplicationController < ActionController::Base
         # Try all possible paths (Firefox requires path to be correct)
         # I haven't found high level to specify same key with different paths.
         # Use low level Rack api here.
-        @cookie_paths ||= request.path.split('/')[1...-1].inject(['/']) {|s,i| s << "#{s.last}#{i}/"}
+        # path has no tailing '/'.
+        @cookie_paths ||= request.path.split('/')[1...-1].inject(['']) {|s,i| s << "#{s.last}/#{i}"}
         @cookie_paths.each do |path|
           Rack::Utils.set_cookie_header! response.header, key, {
             value: '',
