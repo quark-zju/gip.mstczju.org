@@ -31,18 +31,18 @@ class Topic < ActiveRecord::Base
       :join_table => people,
       :class_name => :Staff,
       :uniq => true,
-      :order => "#{q['relation_created_at']} ASC",
       :select => [:id, :name, :email, :nick, :avatar_file_name, :avatar_updated_at].map { |s| "#{q['staffs']}.#{q[s]}" },
     }
 
-    # update cached count
+    # update cached count, and add order
     if [:listeners, :lecturers].include?(people)
       define_method "update_count_of_#{people}" do |*_|
         update_column "#{people.to_s.sub(/s$/, '')}_count".to_sym, send(people).count
       end
       options.merge!(
         :after_add => "update_count_of_#{people}".to_sym,
-        :after_remove => "update_count_of_#{people}".to_sym
+        :after_remove => "update_count_of_#{people}".to_sym,
+        :order => "#{q['relation_created_at']} ASC",
       )
     end
 
