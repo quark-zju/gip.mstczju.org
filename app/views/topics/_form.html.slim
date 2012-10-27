@@ -1,5 +1,3 @@
-- use_ace = (current_staff.preferences.try { |p| p.editor == Preferences::EDITOR_OPTIONS.index(:ACE) })
-
 = form_for @topic do |f|
   /- if @topic.errors.any?
     .row
@@ -15,7 +13,7 @@
         = f.text_field :title
       .field
         = f.label :content
-        - if use_ace
+        - if @use_ace
           #aceeditor.hide
         = f.text_area :content
     .two.columns.end
@@ -36,11 +34,10 @@
       .actions
         = f.submit class: 'button'
 
-- if use_ace
+- if @use_ace
   / Use ACE editor
-  script src='http://d1n0x3qji82z53.cloudfront.net/src-min-noconflict/ace.js'
   coffee:
-    $ ->
+    initEditor = ->
       textarea = $('#topic_content')
       textarea.hide()
       editor = ace.edit('aceeditor')
@@ -74,6 +71,16 @@
       textFilter.change (e)->
         onModeChange e.target.value
       onModeChange(textFilter.val())
+
+    loadAce = ->
+      script = document.createElement("script")
+      script.type = "text/javascript"
+      script.src = 'http://d1n0x3qji82z53.cloudfront.net/src-min-noconflict/ace.js'
+      script.onload = initEditor
+      document.body.appendChild(script)
+
+    $(loadAce)
+    document.addEventListener('page:change', loadAce)
   
   / Use CodeMirror editor
   /coffee:
@@ -92,4 +99,5 @@
         onModeChange e.target.value
       onModeChange(textFilter.val())
   
+
   

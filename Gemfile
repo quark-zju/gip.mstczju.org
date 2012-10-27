@@ -12,6 +12,7 @@ gem 'puma', platforms: [:rbx, :jruby]
 gem 'jruby-openssl', platforms: :jruby
 gem 'activerecord-jdbcpostgresql-adapter', platforms: :jruby
 # gem 'rrails'
+gem 'turbolinks'
 
 # gem 'thumbs_up'
 gem 'acts_as_commentable'

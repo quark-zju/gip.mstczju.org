@@ -12,6 +12,7 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require turbolinks
 //
 //=require foundation/modernizr.foundation
 //=require foundation/jquery.placeholder
@@ -27,7 +28,7 @@
 // require foundation/jquery.foundation.orbit
 //=require foundation/jquery.foundation.mediaQueryToggle
 //
-//  // Use remote ACE instead
+//  // Use remote ACE instead, do not require them here
 //  require ace
 //  require mode-markdown
 //  require mode-textile
@@ -35,7 +36,7 @@
 //= require_tree .
 
 // foundation/{index,app} runs at incorrect time, use own version
-$(function() {
+var initFoundation = function() {
   var $doc = $(document),
       Modernizr = window.Modernizr;
   
@@ -53,5 +54,8 @@ $(function() {
   $.fn.foundationTooltips         ? $doc.foundationTooltips() : null;
 
   $('input, textarea').placeholder();
-});
+}
 
+// for turbolink
+$(initFoundation);
+document.addEventListener('page:change', initFoundation);

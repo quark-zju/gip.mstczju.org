@@ -109,10 +109,12 @@
         return this;
     };
     
-    $(function () {
+    var initExpandingTextarea = function () {
         if ($.expandingTextarea.autoInitialize) {
             $($.expandingTextarea.initialSelector).expandingTextarea();
         }
-    });
-    
+    }
+
+    $(initExpandingTextarea);
+    document.addEventListener('page:change', initExpandingTextarea);
 }));
