@@ -19,6 +19,7 @@ RailsNew::Application.routes.draw do
     post :preferences
     get :profile
     put :profile
+    get :notifications
   end
 
   root to: redirect('/vote/topics')

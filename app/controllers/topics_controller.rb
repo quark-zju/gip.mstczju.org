@@ -9,8 +9,10 @@ class TopicsController < ApplicationController
   end
 
   def show
-    # includes([:listeners,:lecturers,:comments])
-    @topic = Topic.find(params[:id])
+    @topic = Topic.includes([:listeners,:lecturers,:comments]).find(params[:id])
+
+    # clean notifications
+    current_staff.notifications.where(:topic_id => @topic).delete_all
   end
 
   def create
@@ -34,7 +36,7 @@ class TopicsController < ApplicationController
   def register
     collection, method = params[:do].split('_')
 
-    if ['push', 'delete'].include?(method) && ['lecturers', 'listeners'].include?(collection)
+    if ['push', 'delete'].include?(method) && ['lecturers', 'listeners', 'observers'].include?(collection)
       @topic.send(collection).send(method, current_staff)
       expire_cache
     else

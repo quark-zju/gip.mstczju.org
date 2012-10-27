@@ -23,5 +23,9 @@ window.EditComment = (id)->
 #       # put caret at right position again
 #       # control.selectionStart = control.selectionEnd = start + 1
 
-
+$ ->
+  observed = $('#observed')
+  if observed.length
+    observed.click (e)->
+      console.log(e)
 

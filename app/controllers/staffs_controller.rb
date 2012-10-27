@@ -28,4 +28,9 @@ class StaffsController < ApplicationController
     end
   end
 
+  def notifications
+    @topics = Topic.find(current_staff.notifications.pluck(:topic_id))
+    @notifications = current_staff.notifications.order('id DESC').scoped
+  end
+
 end

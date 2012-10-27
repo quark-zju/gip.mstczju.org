@@ -2,15 +2,18 @@
 #
 # Table name: topics
 #
-#  id          :integer          not null, primary key
-#  title       :string(255)
-#  content     :text
-#  staff_id    :integer
-#  category_id :integer
-#  state       :integer
-#  text_filter :integer
-#  created_at  :datetime         not null
-#  updated_at  :datetime         not null
+#  id              :integer          not null, primary key
+#  title           :string(255)
+#  content         :text
+#  staff_id        :integer
+#  category_id     :integer
+#  state           :integer
+#  text_filter     :integer
+#  created_at      :datetime         not null
+#  updated_at      :datetime         not null
+#  lecturer_count  :integer          default(0), not null
+#  listener_count  :integer          default(0), not null
+#  content_preview :text
 #
 
 class Topic < ActiveRecord::Base
@@ -19,16 +22,31 @@ class Topic < ActiveRecord::Base
   validates_uniqueness_of :title
   validates_presence_of :title
 
-  [:listeners, :lecturers].each do |people|
+  has_many :notifications
+
+  [:listeners, :lecturers, :observers].each do |people|
     q = ActiveRecord::Base.connection.method(:quote_column_name)
-    has_and_belongs_to_many people,
+
+    options = {
       :join_table => people,
       :class_name => :Staff,
       :uniq => true,
       :order => "#{q['relation_created_at']} ASC",
       :select => [:id, :name, :email, :nick, :avatar_file_name, :avatar_updated_at].map { |s| "#{q['staffs']}.#{q[s]}" },
-      :after_add => "update_count_of_#{people}".to_sym,
-      :after_remove => "update_count_of_#{people}".to_sym
+    }
+
+    # update cached count
+    if [:listeners, :lecturers].include?(people)
+      define_method "update_count_of_#{people}" do |*_|
+        update_column "#{people.to_s.sub(/s$/, '')}_count".to_sym, send(people).count
+      end
+      options.merge!(
+        :after_add => "update_count_of_#{people}".to_sym,
+        :after_remove => "update_count_of_#{people}".to_sym
+      )
+    end
+
+    has_and_belongs_to_many people, options
   end
 
   acts_as_commentable
@@ -90,13 +108,17 @@ class Topic < ActiveRecord::Base
 
   private
 
-  def update_count_of_listeners(listener)
-    update_column :listener_count, listeners.count
-  end
+  # def update_count_of_listeners(listener)
+  #   update_column :listener_count, listeners.count
+  # end
 
-  def update_count_of_lecturers(lecturer)
-    update_column :lecturer_count, lecturers.count
-  end
+  # def update_count_of_lecturers(lecturer)
+  #   update_column :lecturer_count, lecturers.count
+  # end
+
+  # def update_count_of_lecturers(lecturer)
+  #   update_column :lecturer_count, lecturers.count
+  # end
 
   def clean_content_preview
     update_column :content_preview, '' if persisted?

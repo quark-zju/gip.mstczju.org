@@ -39,6 +39,14 @@ html {
       height: 16px;
     }
 
+    .top-bar ul > li a span.notification-count {
+      @include border-radius(1000px);
+      background-color: $alertColor;
+      padding: ms(0) / 4 ms(0) / 2;
+      margin-left: ms(0) / 2;
+      vertical-align: middle;
+    }
+
     /* .has-tip.noradius.tip-normal {
       font-weight: normal;
       border-bottom: none;

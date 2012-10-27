@@ -1,15 +1,3 @@
-/navbar style
-/.row
-  .twelve.columns
-    ul.nav-bar
-      li = link_to 'Topics', topics_path
-      li = link_to 'New Topic', new_topic_path
-      li = current_staff.name
-      li = link_to 'Logout', destroy_staff_session_path, method: :delete
-    ul.right
-      li = current_staff.name
-      li = link_to 'Logout', destroy_staff_session_path, method: :delete
-
 nav.top-bar.contain-to-gird
   ul
     li.name
@@ -26,13 +14,20 @@ nav.top-bar.contain-to-gird
         li.divider
         li = link_to 'New Topic', new_topic_path
       li.divider
+
     ul.right
       - if current_staff
+        - if can? :read, Notification
+          - notification_count = current_staff.notifications.count
         li.has-dropdown
           a 
             = image_tag current_staff.avatar.url(:icon), class: 'avatar-icon'
             = nickname_of current_staff
+            - if notification_count && notification_count > 0
+              span.notification-count = notification_count
           ul.dropdown
+            - if notification_count
+              li = link_to "Notifications (#{notification_count})", notifications_path
             li = link_to 'Profile', profile_path
             li = link_to 'Preferences', preferences_path
             li = link_to 'Sign out', destroy_staff_session_path, method: :delete

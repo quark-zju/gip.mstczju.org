@@ -1,3 +1,5 @@
+# coding: utf-8
+
 module TopicsHelper
 
   include StaffsHelper
@@ -38,5 +40,15 @@ module TopicsHelper
       topic.update_column :content_preview, preview
       preview
     end.html_safe
+  end
+
+  def toggle_button_of(topic, people, verb = nil)
+    verb ||= people.to_s.sub(/ers$/, '').capitalize
+    html = if topic.send(people).include?(current_staff)
+             link_to "☑  #{verb}", register_topic_path(topic, :do => "#{people}_delete"), :method => :post, :class => [:button]
+           else
+             link_to "☐  #{verb}", register_topic_path(topic, :do => "#{people}_push"), :method => :post, :class => [:button, :secondary]
+           end
+    "<li>#{html}</li>".html_safe
   end
 end

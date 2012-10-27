@@ -14,6 +14,11 @@
 #  last_sign_in_ip     :string(255)
 #  created_at          :datetime         not null
 #  updated_at          :datetime         not null
+#  preferences         :text
+#  avatar_file_name    :string(255)
+#  avatar_content_type :string(255)
+#  avatar_file_size    :integer
+#  avatar_updated_at   :datetime
 #
 
 require 'net/http'
@@ -24,6 +29,8 @@ class Staff < ActiveRecord::Base
 
   attr_accessible :nick, :preferences
   attr_accessible :avatar
+
+  has_many :notifications
 
   has_attached_file :avatar, 
     :styles => { :medium => "60x60>", :icon => "16x16>" },

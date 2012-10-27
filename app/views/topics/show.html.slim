@@ -22,14 +22,10 @@
               li = link_to 'Delete', @topic, :confirm => 'Are you sure?', :method => :delete, :class => [:button, :alert]
           - if can? :register, @topic
             ul.button-group
-              - if @topic.listeners.include?(current_staff)
-                li = link_to 'Won\'t listen', register_topic_path(@topic, :do => 'listeners_delete'), :method => :post, :class => [:button]
-              - else
-                li = link_to 'Will listen', register_topic_path(@topic, :do => 'listeners_push'), :method => :post, :class => [:button]
-              - if @topic.lecturers.include?(current_staff)
-                li = link_to 'Won\'t talk', register_topic_path(@topic, :do => 'lecturers_delete'), :method => :post, :class => [:button]
-              - else
-                li = link_to 'Will talk', register_topic_path(@topic, :do => 'lecturers_push'), :method => :post, :class => [:button]
+              = toggle_button_of(@topic, :listeners, 'Listen')
+              = toggle_button_of(@topic, :lecturers, 'Talk')
+            ul.button-group
+              = toggle_button_of(@topic, :observers, 'New comments notification')
 
   / left sidebar
   .two.columns.pull-ten.topic-information
@@ -57,4 +53,3 @@
 
 - if can? :comment, @topic
   == render @topic.comments.build(user_id: current_staff.id)
-

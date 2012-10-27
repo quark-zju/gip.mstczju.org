@@ -13,6 +13,7 @@ class Ability
       # cannot [:vote, :unvote], Topic, :staff_id => user.id
 
       can [:read, :create], [Topic, Comment]
+      can :read, Notification
     end
   end
 end
