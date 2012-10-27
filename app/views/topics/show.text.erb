@@ -1,0 +1,12 @@
+<%=raw @topic.title %>
+========
+<%=raw @topic.content %>
+
+Listeners
+---------
+<%=raw @topic.listeners.map(&:name).join("\n") %>
+
+Lecturers
+---------
+<%=raw @topic.lecturers.map(&:name).join("\n") %>
+
