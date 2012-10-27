@@ -13,6 +13,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require turbolinks
+//= require utils
 //
 //=require foundation/modernizr.foundation
 //=require foundation/jquery.placeholder
@@ -57,5 +58,4 @@ var initFoundation = function() {
 }
 
 // for turbolink
-$(initFoundation);
-document.addEventListener('page:change', initFoundation);
+$r(initFoundation);

@@ -115,6 +115,6 @@
         }
     }
 
-    $(initExpandingTextarea);
-    document.addEventListener('page:change', initExpandingTextarea);
+    $r(initExpandingTextarea);
+    
 }));
