@@ -37,7 +37,8 @@
 //= require_tree .
 
 // foundation/{index,app} runs at incorrect time, use own version
-var initFoundation = function() {
+var initFoundation = function(firstTime) {
+  console.log('initFoundation');
   var $doc = $(document),
       Modernizr = window.Modernizr;
   
@@ -48,7 +49,13 @@ var initFoundation = function() {
   $.fn.foundationButtons          ? $doc.foundationButtons() : null;
   $.fn.foundationAccordion        ? $doc.foundationAccordion() : null;
   $.fn.foundationNavigation       ? $doc.foundationNavigation() : null;
-  $.fn.foundationTopBar           ? $doc.foundationTopBar() : null;
+  // Make foundation happy with turbolinks
+  if (!firstTime) {
+    $('.top-bar .has-dropdown>a').die();
+    $('.top-bar .toggle-topbar').die();
+    $('.top-bar .has-dropdown .back').die();
+  }
+  $.fn.foundationTopBar           ? $doc.foundationTopBar({index : 0, initialized : false}) : null;
   $.fn.foundationCustomForms      ? $doc.foundationCustomForms() : null;
   $.fn.foundationMediaQueryViewer ? $doc.foundationMediaQueryViewer() : null;
   $.fn.foundationTabs             ? $doc.foundationTabs({callback : $.foundation.customForms.appendCustomMarkup}) : null;

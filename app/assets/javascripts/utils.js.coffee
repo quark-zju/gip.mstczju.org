@@ -1,4 +1,6 @@
 # for turbolink
 window.$r = (func) ->
-  $(func)
-  document.addEventListener('page:change', func)
+  $ ->
+    func(true)
+  document.addEventListener 'page:change', ->
+    func(false)
