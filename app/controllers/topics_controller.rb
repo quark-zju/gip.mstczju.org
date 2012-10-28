@@ -20,7 +20,10 @@ class TopicsController < ApplicationController
   end
 
   def create
-    save('create', 'new') { @topic.save }
+    save('create', 'new') do
+      @topic.save 
+      @topic.observers << @topic.staff
+    end
   end
 
   def new
@@ -40,8 +43,16 @@ class TopicsController < ApplicationController
   def register
     collection, method = params[:do].split('_')
 
-    if ['push', 'delete'].include?(method) && ['lecturers', 'listeners', 'observers'].include?(collection)
-      @topic.send(collection).send(method, current_staff)
+    if collection != :observers && method == 'push' && @topic.observers.where('staffs.id' => current_staff.id).limit(1).count == 0
+      collection = [collection, 'observers']
+    else
+      collection = [collection]
+    end
+
+    if ['push', 'delete'].include?(method) && (collection - ['lecturers', 'listeners', 'observers'] == [])
+      collection.each do |people|
+        @topic.send(people).send(method, current_staff)
+      end
       expire_cache
     else
       raise RuntimeError.new("Unknown register action")
