@@ -1,0 +1,30 @@
+- comment ||= @comment
+- hide_edit = false
+- if comment.persisted?
+  .row.comment-body class="comment-#{comment.id}-body"
+    .two.columns.mobile-one
+      p
+        span.name.right
+          == avatar_of comment.user, :name_and_avatar
+        br
+        - if comment.updated_at > comment.created_at
+          - tip = "Created at: #{ti comment.created_at}"
+          small.updated_at.right.has-tip.noradius title="#{tip}" = ti comment.updated_at
+        - else
+          small.updated_at.right = ti comment.updated_at
+
+    .nine.columns.mobile-three
+      == GitHub::Markup.render('comment.md', comment.comment)
+    .one.column.hide-for-small
+      - if can?(:edit, comment)
+        a.button.tiny.right onclick="EditComment(#{comment.id})" Edit
+        - hide_edit = true
+- if can? :edit, comment
+  .row.comment-edit class="comment-#{comment.id}-edit #{hide_edit && 'hide'}"
+    .two.columns.hide-for-small
+      p
+        span.name.right
+          == avatar_of comment.user, :name_and_avatar
+    .nine.columns
+      == render :partial => 'comments/form', :locals => { :comment => comment }
+    .one.column

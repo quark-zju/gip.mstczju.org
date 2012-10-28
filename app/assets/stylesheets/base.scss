@@ -1,0 +1,149 @@
+@import "foundation/common/ratios";
+
+// Settings file containing Foundation defaults
+
+// Media Queries
+$screenSmall: 639px;
+$screenMedium: 639px; // No medium
+$screenXlarge: 1441px;
+
+// Grid Settings
+
+// fluid more wide
+$rowWidth: 1800px;
+// $columnGutter: 30px;
+// $totalColumns: 12;
+// $mobileTotalColumns: 4;
+
+// Text Direction Settings
+
+// $textDirection: ltr; // Controls default global text direction, 'rtl' or 'ltr'
+
+// Colors Settings
+
+$mainColor: #2ba6cb;
+// $secondaryColor: #e9e9e9;
+// $alertColor: #c60f13;
+// $successColor: #5da423;
+$txtColor: #222;
+$highlightColor: #ffff99;
+$black: #000;
+$white: #fff;
+$shinyEdge: rgba(#fff, .5);
+$darkEdge: rgba(#000, .2);
+
+// Typography Settings
+
+$headerFontFamily: Verdana, "Microsoft YaHei",  Arial, sans-serif;
+// $headerFontWeight: bold;
+// $headerFontColor: #222;
+$bodyFontFamily: $headerFontFamily;
+// $bodyFontWeight: normal;
+// $bodyFontColor: $txtColor;
+
+// Button Settings
+
+$buttonRadius: 0px;
+// $btnBase: 10px;
+
+// $tinyBtnBase: $btnBase - 5;
+// $smallBtnBase: $btnBase - 3;
+// $largeBtnBase: $btnBase + 5;
+
+// Form Settings
+
+// $formSpacing: 12px;
+
+// Tab Settings
+
+// $tabHeight: 40px;
+
+// Nav Bar Settings
+
+// $navBarHeight: 40px;
+// $navFlyoutBaseWidth: 250px;
+
+// UI Settings
+
+// $thumbRadius: 3px;
+
+// $progBarHeight: 25px;
+// $progBarBorderColor: darken($white, 20%);
+// $progBarBorderSize: 1px;
+// $progBarPad: 2px;
+
+// Modular Scale
+
+// $ratio: $golden;
+// $baseFontSize: 14px;
+// $importantModNum: 44px;
+
+// Tooltip Settings
+
+// $hasTipBorderBottom: dotted 1px #ccc;
+// $hasTipFontWeight: bold;
+// $hasTipFontColor: #333;
+// $hasTipBorderBottomHover: dotted 1px darken($mainColor, 20%);
+// $hasTipFontColorHover: $mainColor;
+// $tooltipBackgroundColor: #000;
+// $tooltipBackgroundOpacity: 0.85;
+// $tooltipFontSize: 12;
+// $tooltipFontWeight: bold;
+// $tooltipFontColor: #fff;
+// $tapToCloseFontSize: 10;
+// $tapToCloseFontWeight: normal;
+// $tapToCloseFontColor: #888;
+// $tooltipFontSizeScreenSmall: 14;
+// $tooltipBackgroundOpacityScreenSmall: 0.85;
+
+// Top Bar Settings
+
+// $topBarBgColor: #222;
+// $topBarHeight: 45px;
+// $topBarBtmMargin: 30px;
+// $topBarTitleWeight: bold;
+// $topBarTitleSize: ms(1);
+// $topBarLinkColor: $white;
+// $topBarLinkWeight: bold;
+// $topBarLinkSize: ms(0) - 1;
+// $topBarDropToggleSize: 5px;
+// $topBarSearchWidth: 200px;
+$topBarBreakPoint: $screenSmall; // Change to 9999px for always mobile layout
+// $topBarNavToggleSize: 8px;
+
+// Other imports
+
+@import "compass/css3";
+@import "modular-scale";
+@import "foundation/functions/all";
+@import "foundation/settings";
+@import "foundation/mixins/all";
+
+// Non foundation part
+
+$codeFontFamily: 'Consolas', 'Dejavu Sans Mono', 'Courier New', monospace;
+
+@mixin resizeHeaders($baseSize, $powerBase: 1.098, $margin-vertically: ms(0)) {
+  h1 {
+    font-size: power($powerBase, 5) * $baseSize;
+  }
+  h2 { 
+    font-size: power($powerBase, 4) * $baseSize; 
+  }
+  h3 {
+    font-size: power($powerBase, 3) * $baseSize;
+  }
+  h4 {
+    font-size: power($powerBase, 2) * $baseSize;
+  }
+  h5 {
+    font-size: power($powerBase, 1) * $baseSize;
+  }
+  h6 {
+    font-size: power($powerBase, 0) * $baseSize;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    margin-top: $margin-vertically;
+    margin-bottom: $margin-vertically;
+  }
+}

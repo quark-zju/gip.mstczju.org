@@ -1,0 +1,17 @@
+- content_for(:title) { 'Notifications' }
+- has_notification = false
+
+.row
+  .two.columns
+  .ten.columns
+    h2 Notifications
+    .topic-list
+      - @topics.each do |topic|
+        h2 = link_to topic.title, topic
+        ul
+          - @notifications.where(:topic_id => topic.id).each do |notification|
+            li = notification.message
+            - has_notification = true
+    - if ! has_notification
+      p None.
+

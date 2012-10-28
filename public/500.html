@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Server Error (500)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <style type="text/css">
+    body { padding: 0 3em; background-color: #eee; color: #666; font-family: verdana, arial, sans-serif; display: inline-block; margin: 0 0; }
+    .emoj { font-size: 16em; color: #ccc; }
+    h1 { font-size: 1.1em; line-height: 1.5em; }
+  </style>
+</head>
+
+<script>
+//<![CDATA[
+window.onresize = function(e) {
+  var w = window.innerWidth;
+  var h = window.innerHeight;
+  var body = document.getElementsByTagName('body')[0];
+
+  while (body.clientHeight <= h && body.clientWidth <= w) {
+    var size = parseFloat(body.style.fontSize);
+    if (isNaN(size)) size = 1;
+    body.style.fontSize = (size + 0.5) + 'em';
+  }
+
+  while (body.clientHeight > h || body.clientWidth > w) {
+    var size = parseFloat(body.style.fontSize);
+    if (isNaN(size)) size = 2;
+    if (size <= 1) break;
+    body.style.fontSize = (size - 0.5) + 'em';
+  }
+}
+window.onload = function(e) {
+    var lang = navigator.language;
+    if (lang && lang.toLowerCase().indexOf('zh') == 0) {
+        document.getElementById('p1').innerHTML = 'HTTP 500 - 服务器内部错误';
+        document.getElementById('p2').innerHTML = '服务器可能太忙了，请稍后再试试。';
+    }
+    window.onresize();
+}
+//]]>
+</script>
+
+<body>
+  <span class='emoj'>:(</span>
+  <p id='p1'>HTTP 500 - Internal Server Error</p>
+  <p id='p2'>Maybe the server is over capacity. Please try again later.</p>
+</body>
+</html>
+

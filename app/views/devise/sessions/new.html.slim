@@ -1,0 +1,47 @@
+- content_for(:title) { 'Staff::SignIn' }
+
+.row
+  .five.columns.centered
+    h2 Sign in
+    = form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f|
+      .field.row
+        .three.columns.mobile-one
+          = f.label :email, :class => [:right, :inline]
+        .nine.columns.mobile-three
+          = f.email_field :email, :placeholder => "ming.xing", :autofocus => 'autofocus' 
+      .field.row
+        .three.columns.mobile-one
+          = f.label :password, :class => [:right, :inline]
+        .nine.columns.mobile-three
+          = f.password_field :password, :placeholder => 'passowrd'
+      - if devise_mapping.rememberable?
+        = f.hidden_field :remember_me, :value => true
+      .actions
+        .row
+          .three.columns
+          .nine.columns
+            = f.submit "Sign in", :class => [:button]
+
+script
+  | window.emailPostfix = '#{{Staff::email_postfix}}';
+  
+coffee:
+  initStaff = ->
+    PINYIN_FINALS = "(?:uang)|(?:iang)|(?:iong)|(?:ong)|(?:ang)|(?:ing)|(?:eng)|(?:uan)|(?:ian)|(?:uai)|(?:iao)|(?:uan)|(?:shi)|(?:un)|(?:zi)|(?:ai)|(?:un)|(?:ie)|(?:ia)|(?:ui)|(?:iu)|(?:uo)|(?:ua)|(?:ei)|(?:er)|(?:ou)|(?:ao)|(?:en)|(?:ue)|(?:an)|(?:in)|u|u|i|e|o|a"
+    PINYIN_INITIALS = '[bpmfdtnlgkhjqxrzcsyw]|(?:[zcs]h)'
+    PINYIN_NAME_REGEX = RegExp("^((?:#{PINYIN_INITIALS})(?:#{PINYIN_FINALS}))((?:(?:#{PINYIN_INITIALS})(?:#{PINYIN_FINALS}))+)([0-9]*)$")
+    $('#staff_email').change (e)->
+      value = e.target.value
+      if value.indexOf('.') < 0
+        names = PINYIN_NAME_REGEX.exec(e.target.value)
+        if names
+          # zhangchi3 => chi3.zhang
+          value = "#{names[2]}#{names[3]}.#{names[1]}"
+      if value.indexOf('.') >= 0 && value.indexOf('@') < 0
+        value += window.emailPostfix
+      if value != e.target.value
+        e.target.value = value
+  $(initStaff)
+  document.addEventListener('page:change', initStaff)
+
+
