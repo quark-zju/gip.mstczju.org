@@ -31,7 +31,7 @@ end
 
 page_cache_path = Rails.root.join('tmp', 'cache', 'pages')
 FileUtils.mkdir_p page_cache_path
-ActionController::Base.cache_store = TimedFileStore.new(page_cache_path), { time_to_live: 12.hours }
+ActionController::Base.cache_store = TimedFileStore.new(page_cache_path), { time_to_live: 2.weeks }
 
 Rails.application.config.action_controller.perform_caching = true
 
