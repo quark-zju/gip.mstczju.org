@@ -6,7 +6,7 @@ module ApplicationHelper
 
   def count_as_zheng(count)
     i = count.to_i
-    i == 0 ? '〇' : '正' * (i / 5) + ['', *'丨丄上止正'.chars][i]
+    i == 0 ? '〇' : '正' * (i / 5) + ['', *'丨丄上止正'.chars][i % 5]
   end
 
   def subnav(param, tags, url, default = nil)
