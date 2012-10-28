@@ -1,0 +1,82 @@
+// Place all the styles related to the topics controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+@import 'base';
+
+html {
+  @media screen {
+
+    .topic-list {
+      .vote-count {
+        padding: ms(0) / $golden;
+        margin-top: ms(0);
+        background: darken($white, 10%);
+      }
+
+      .avatars {
+        margin-top: ms(0);
+        clear: both;
+      }
+
+      h2 .label {
+        vertical-align: middle;
+      }
+    }
+
+    .topic-information {
+      img.avatar-icon {
+        margin-right: ms(0) / 3;
+      }
+    }
+
+    #aceeditor {
+      position: relative;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      min-height: 12em;
+    }
+
+    /* .topic {
+      .preview {
+        max-height: 100px;
+        overflow-y: hidden;
+      }
+    } */
+
+    .comment-edit {
+      textarea {
+        max-height: 40em;
+      }
+    }
+
+    .comment-body, .topic .content {
+      @include resizeHeaders(ms(0));
+    }
+
+    .topic-list h2, .topic > h2 {
+      font-size: ms(0) * 1.6;
+    }
+
+  }
+
+  @include respondTo(smallScreen) {
+    // for a compact topic index
+    .topic-list {
+      .vote-count {
+        float: right;
+        padding: 0;
+        margin-top: ms(0) * 0.65;
+        background: none;
+      }
+    }
+
+    .topic-list h2 {
+      font-size: ms(0) * 1.3;
+      margin-top: ms(0) / 2;
+      margin-bottom: 0;
+    }
+  }
+}

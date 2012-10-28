@@ -1,0 +1,19 @@
+- content_for(:title) { 'Profile' }
+
+
+.row
+  .five.columns.centered
+    h2 Profile
+    = form_for(@staff, url: profile_path) do |f|
+      .fields
+        .field
+          = f.label :nick
+          = f.text_field :nick
+        .field
+          = image_tag @staff.avatar.url(:medium), class: 'right'
+          = f.label :avatar
+          = f.file_field :avatar
+
+      hr
+      .actions
+        = f.submit 'Save', class: 'button'
