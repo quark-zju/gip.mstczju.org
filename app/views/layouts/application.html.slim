@@ -27,9 +27,10 @@ head
   = csrf_meta_tag
 
 body
+  #loading.hide-on-print Loading
   == render 'layouts/topnav'
   .container
-    .top-notification.row
+    .row.top-notification
       .twelve.columns
         - emergency_notice_path = Rails.root.join('public', 'notice')
         - emergency_notice = File.exists?(emergency_notice_path) && File.read(emergency_notice_path)

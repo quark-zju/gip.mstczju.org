@@ -59,6 +59,17 @@ html {
       }
     } */
 
+    #loading {
+      position: fixed;
+      background: $alertColor;
+      color: $white;
+      z-index: 1000;
+      bottom: 0px;
+      right: ms(0);
+      padding: ms(0) / 4 ms(0) / 2;
+      display: none;
+    }
+
     img.has-tip.noradius:hover {
       cursor: default;
       border: thin solid $mainColor; 

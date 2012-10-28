@@ -37,24 +37,23 @@
 //= require_tree .
 
 // foundation/{index,app} runs at incorrect time, use own version
-var initFoundation = function(firstTime) {
+var initFoundation = function() {
   var $doc = $(document),
       Modernizr = window.Modernizr;
   
   // Some browser lies about touch (e.g. chrome)
   Modernizr.touch = false;
 
+  // Make foundation happy with turbolinks
+  $('.js-generated').remove();
+  $('.top-bar .has-dropdown>a').die('click.fndtn');
+  $('.top-bar .toggle-topbar').die('click.fndtn');
+  $('.top-bar .has-dropdown .back').die('click.fndtn');
+
   $.fn.foundationAlerts           ? $doc.foundationAlerts() : null;
   $.fn.foundationButtons          ? $doc.foundationButtons() : null;
   $.fn.foundationAccordion        ? $doc.foundationAccordion() : null;
   $.fn.foundationNavigation       ? $doc.foundationNavigation() : null;
-  // Make foundation happy with turbolinks
-  if (!firstTime) {
-    $('.js-generated').remove();
-    $('.top-bar .has-dropdown>a').die('click.fndtn');
-    $('.top-bar .toggle-topbar').die('click.fndtn');
-    $('.top-bar .has-dropdown .back').die('click.fndtn');
-  }
   $.fn.foundationTopBar           ? $doc.foundationTopBar({index : 0, initialized : false}) : null;
   $.fn.foundationCustomForms      ? $doc.foundationCustomForms() : null;
   $.fn.foundationMediaQueryViewer ? $doc.foundationMediaQueryViewer() : null;
@@ -65,4 +64,4 @@ var initFoundation = function(firstTime) {
 }
 
 // for turbolink
-$r(initFoundation);
+$r(initFoundation, true);
