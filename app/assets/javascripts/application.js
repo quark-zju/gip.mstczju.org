@@ -13,7 +13,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require turbolinks
-//= require utils
+//= require turbolinks_support
 //
 //=require foundation/modernizr.foundation
 //=require foundation/jquery.placeholder
@@ -50,6 +50,7 @@ var initFoundation = function(firstTime) {
   $.fn.foundationNavigation       ? $doc.foundationNavigation() : null;
   // Make foundation happy with turbolinks
   if (!firstTime) {
+    $('.js-generated').remove();
     $('.top-bar .has-dropdown>a').die('click.fndtn');
     $('.top-bar .toggle-topbar').die('click.fndtn');
     $('.top-bar .has-dropdown .back').die('click.fndtn');
