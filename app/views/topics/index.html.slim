@@ -19,10 +19,7 @@
             .right.lecturers.avatars.hide-for-small
               == avatar_of topic.lecturers, :avatar_only, class: ['right']
             .right.vote-count.show-for-small
-              - if use_zheng
-                span.right = count_as_zheng(topic.listener_count)
-              - else
-                span.right == topic.listener_count
+              span.right == topic.listener_count
           .nine.columns.mobile-three.pull-one-mobile
             article.topic
               h2 

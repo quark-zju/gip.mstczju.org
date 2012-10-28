@@ -9,8 +9,8 @@
         .field
           = f.label :editor
           = f.select :editor, Preferences::EDITOR_OPTIONS.map.with_index.to_a
-        br
-        .field
+        /br
+        /.field
           = f.label :vote_display
           = f.select :vote_display, Preferences::VOTE_DISPLAY_OPTIONS.map.with_index.to_a
       hr
