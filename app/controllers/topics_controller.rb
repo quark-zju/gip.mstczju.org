@@ -22,7 +22,6 @@ class TopicsController < ApplicationController
   end
 
   def new
-    sleep 3
   end
 
   def edit
