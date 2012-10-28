@@ -16,8 +16,9 @@
           .three.columns.mobile-one.push-three-mobile
             .right.listeners.avatars.hide-for-small
               == avatar_of topic.listeners, :avatar_only, class: ['right']
-            .right.lecturers.avatars.hide-for-small
-              == avatar_of topic.lecturers, :avatar_only, class: ['right']
+            - unless topic.state_for_book?
+              .right.lecturers.avatars.hide-for-small
+                == avatar_of topic.lecturers, :avatar_only, class: ['right']
             .right.vote-count.show-for-small
               span.right == topic.listener_count
           .nine.columns.mobile-three.pull-one-mobile

@@ -22,8 +22,11 @@
               li = link_to 'Delete', @topic, :confirm => 'Are you sure?', :method => :delete, :class => [:button, :alert]
           - if can? :register, @topic
             ul.button-group
-              = toggle_button_of(@topic, :listeners, 'Listen')
-              = toggle_button_of(@topic, :lecturers, 'Talk')
+              - if @topic.state_for_book?
+                = toggle_button_of(@topic, :listeners, 'Participant')
+              - else
+                = toggle_button_of(@topic, :listeners, 'Listen')
+                = toggle_button_of(@topic, :lecturers, 'Talk')
             ul.button-group
               = toggle_button_of(@topic, :observers, 'New comments notification')
 
@@ -31,14 +34,20 @@
   .two.columns.pull-ten.topic-information
     h3.right
     .panel
-      - if @topic.listener_count > 0
-        div.listeners
-          small Listeners
-          == avatar_of @topic.listeners, :avatar_and_name_list
-      - if @topic.lecturer_count > 0
-        div.lecturers
-          small Lecturers
-          == avatar_of @topic.lecturers, :avatar_and_name_list
+      - if @topic.state_for_book?
+        - if @topic.listener_count > 0
+          div.listeners
+            small Participators
+            == avatar_of @topic.listeners, :avatar_and_name_list
+      - else
+        - if @topic.listener_count > 0
+          div.listeners
+            small Listeners
+            == avatar_of @topic.listeners, :avatar_and_name_list
+        - if @topic.lecturer_count > 0
+          div.lecturers
+            small Lecturers
+            == avatar_of @topic.lecturers, :avatar_and_name_list
       div.name
         small Created by
         == avatar_of @topic.staff, :avatar_and_name_list
