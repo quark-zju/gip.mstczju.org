@@ -6,6 +6,8 @@ class TopicsController < ApplicationController
   before_filter :check_ace_editor, only: [:edit, :new]
 
   def index
+    remember_or_recall_params :state, :campus
+
     @topics = Topic.includes([:listeners,:lecturers]).filter_by_tags([params[:state] || 'open', params[:campus]].compact).scoped
     @topics = @topics.sort_by((params[:order] || :updated).to_s)
   end
