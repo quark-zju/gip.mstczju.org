@@ -41,22 +41,21 @@ class Comment < ActiveRecord::Base
     return unless topic.is_a?(Topic)
 
     # notify mentioned
-    mentioner = Staff.find(user_id)
+    commentator = Staff.find(user_id)
     notified = []
     comment.scan(/@([^, ]+)/).map(&:first).uniq.each do |name|
       staff = Staff.find_by_name(name) || Staff.find_by_nick(name)
       next if !staff || staff.id == user_id
 
       notified << staff.id
-      staff.notifications.create!(:topic_id => topic.id, :message => "#{mentioner.name} mentioned you.")
+      staff.notifications.create!(:topic_id => topic.id, :message => "#{commentator.name} mentioned you.")
     end
 
     # notify all observers
     topic.observers.includes(:notifications).each do |staff|
       next if staff.id == user_id || notified.include?(staff.id)
-      staff.notifications.create!(:topic_id => topic.id, :message => "#{mentioner.name} added a new comment.")
+      staff.notifications.create!(:topic_id => topic.id, :message => "#{commentator.name} added a new comment.")
     end
-
   end
 
 end
