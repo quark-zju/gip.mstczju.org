@@ -43,14 +43,14 @@ class TopicsController < ApplicationController
   def register
     collection, method = params[:do].split('_')
 
-    if collection != :observers && method == 'push' && @topic.observers.where('staffs.id' => current_staff.id).limit(1).count == 0
+    if collection != 'observers' && method == 'push' && @topic.observers.where('staffs.id' => current_staff.id).limit(1).count == 0
       collection = [collection, 'observers']
     else
       collection = [collection]
     end
 
     if ['push', 'delete'].include?(method) && (collection - ['lecturers', 'listeners', 'observers'] == [])
-      collection.each do |people|
+      collection.uniq.each do |people|
         @topic.send(people).send(method, current_staff)
       end
       expire_cache
