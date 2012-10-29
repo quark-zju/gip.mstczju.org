@@ -9,6 +9,16 @@ class ApplicationController < ActionController::Base
     @current_ability ||= Ability.new(current_staff)
   end
 
+  def remember_or_recall_params(*keys)
+    keys.each do |key|
+      if params[key]
+        session[key] = params[key]
+      else
+        params[key] = session[key]
+      end
+    end
+  end
+
   rescue_from CanCan::AccessDenied do |ex|
     if current_staff
       render text: ex.message

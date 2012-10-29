@@ -19,8 +19,6 @@
 class Topic < ActiveRecord::Base
   belongs_to :staff
 
-  validates_uniqueness_of :title
-  validates_presence_of :title
 
   has_many :notifications
 
@@ -49,14 +47,16 @@ class Topic < ActiveRecord::Base
     has_and_belongs_to_many people, options
   end
 
-  acts_as_commentable
-
   TEXT_FILTER_LIST = [:markdown, :textile]
-  STATES = [:closed, :yq, :zjg]
-
-  bitmask :state, :as => STATES
+  STATES = [:closed, :yq, :zjg, :book]
 
   attr_accessible :content, :title, :state, :text_filter, *STATES
+
+  bitmask :state, :as => STATES
+  acts_as_commentable
+
+  validates_uniqueness_of :title
+  validates_presence_of :title
 
   before_save :clean_content_preview
 
@@ -64,6 +64,7 @@ class Topic < ActiveRecord::Base
     define_method(st) { state.include? st }
     define_method("#{st}=") { |x| x && x.to_s != '0' ? (state << st) : state.delete(st) }
   end
+
 
   # scopes
   class << self

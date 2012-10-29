@@ -7,12 +7,11 @@ module TopicsHelper
   def state_labels_of(topic)
     topic.state.map do |st|
       classes = [:round, :label]
-      text = st.to_s
+      text = st.to_s.capitalize
 
       if st == :closed
         classes << :alert
-        text.capitalize!
-      else
+      elsif text.length < 4
         text.upcase!
       end
 
