@@ -1,6 +1,6 @@
-source 'https://rubygems.org'
+source 'http://rubygems.org'
 
-gem 'rails', '3.2.8'
+gem 'rails', '3.2.11'
 
 gem 'rails-i18n'
 gem 'jquery-rails'
@@ -13,6 +13,9 @@ gem 'jruby-openssl', platforms: :jruby
 gem 'activerecord-jdbcpostgresql-adapter', platforms: :jruby
 # gem 'rrails'
 gem 'turbolinks'
+gem 'icalendar'
+gem 'delayed_job'
+gem 'delayed_job_active_record'
 
 # gem 'thumbs_up'
 gem 'acts_as_commentable'
