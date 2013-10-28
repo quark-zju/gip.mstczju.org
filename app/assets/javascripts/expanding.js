@@ -115,6 +115,6 @@
         }
     }
 
-    $r(initExpandingTextarea);
+    $onPageLoad(initExpandingTextarea);
     
 }));

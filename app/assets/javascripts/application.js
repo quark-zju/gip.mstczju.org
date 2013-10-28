@@ -64,4 +64,4 @@ var initFoundation = function() {
 }
 
 // for turbolink
-$r(initFoundation, true);
+$onPageLoad(initFoundation, true);

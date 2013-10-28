@@ -1,5 +1,5 @@
 # for turbolink
-window.$r = (func, force=false) ->
+window.$onPageLoad = (func, force=false) ->
   $(func)
   for event in (if force then ['page:change', 'page:restore'] else ['page:load'])
     document.removeEventListener event, func
