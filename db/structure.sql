@@ -1,4 +1,5 @@
 CREATE TABLE "comments" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "title" varchar(50) DEFAULT '', "comment" text, "commentable_id" integer, "commentable_type" varchar(255), "user_id" integer, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL);
+CREATE TABLE "delayed_jobs" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "priority" integer DEFAULT 0, "attempts" integer DEFAULT 0, "handler" text, "last_error" text, "run_at" datetime, "locked_at" datetime, "failed_at" datetime, "locked_by" varchar(255), "queue" varchar(255), "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL);
 CREATE TABLE "lecturers" ("staff_id" integer NOT NULL, "topic_id" integer NOT NULL, "relation_created_at" DATETIME DEFAULT CURRENT_TIMESTAMP);
 CREATE TABLE "listeners" ("staff_id" integer NOT NULL, "topic_id" integer NOT NULL, "relation_created_at" DATETIME DEFAULT CURRENT_TIMESTAMP);
 CREATE TABLE "notifications" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "staff_id" integer NOT NULL, "topic_id" integer NOT NULL, "message" varchar(255) NOT NULL, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL);
@@ -8,6 +9,7 @@ CREATE TABLE "sessions" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "sessi
 CREATE TABLE "staffs" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "email" varchar(255) DEFAULT '' NOT NULL, "nick" varchar(255) DEFAULT '' NOT NULL, "name" varchar(255) DEFAULT '' NOT NULL, "remember_created_at" datetime, "sign_in_count" integer DEFAULT 0, "current_sign_in_at" datetime, "last_sign_in_at" datetime, "current_sign_in_ip" varchar(255), "last_sign_in_ip" varchar(255), "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL, "preferences" text, "avatar_file_name" varchar(255), "avatar_content_type" varchar(255), "avatar_file_size" integer, "avatar_updated_at" datetime);
 CREATE TABLE "topics" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "title" varchar(255), "content" text, "staff_id" integer, "category_id" integer, "state" integer, "text_filter" integer, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL, "lecturer_count" integer DEFAULT 0 NOT NULL, "listener_count" integer DEFAULT 0 NOT NULL, "content_preview" text);
 CREATE TABLE "votes" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "vote" boolean DEFAULT 'f' NOT NULL, "voteable_id" integer NOT NULL, "voteable_type" varchar(255) NOT NULL, "voter_id" integer, "voter_type" varchar(255), "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL);
+CREATE INDEX "delayed_jobs_priority" ON "delayed_jobs" ("priority", "run_at");
 CREATE UNIQUE INDEX "fk_one_vote_per_user_per_entity" ON "votes" ("voter_id", "voter_type", "voteable_id", "voteable_type");
 CREATE INDEX "index_comments_on_commentable_id" ON "comments" ("commentable_id");
 CREATE INDEX "index_comments_on_commentable_type" ON "comments" ("commentable_type");
@@ -66,3 +68,5 @@ INSERT INTO schema_migrations (version) VALUES ('20121027010123');
 INSERT INTO schema_migrations (version) VALUES ('20121027010320');
 
 INSERT INTO schema_migrations (version) VALUES ('20121027170415');
+
+INSERT INTO schema_migrations (version) VALUES ('20121101175700');
