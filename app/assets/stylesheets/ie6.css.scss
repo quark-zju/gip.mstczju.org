@@ -1,0 +1,32 @@
+.ie6 {
+  .column, .columns {
+    margin-left: 0;float: none;min-height: 1px;
+  }
+  .column:first-child, .columns:first-child {
+    margin-left: 0
+  }
+  .columns  {
+    margin:0 16px 0 0; overflow:hidden; float:left; display:inline
+  }
+  .row  {
+    margin:0 auto; width:960px; overflow:hidden
+  }
+  .row .row  {
+    margin-left:0;width:auto; display:inline-block
+  }
+  .container:after  {
+    content: "\0020"; display: block; height: 0; clear: both; visibility: hidden
+  } 
+  .clearfix:before,.clearfix:after,.row:before,.row:after {
+    content:'\0020'; display:block; overflow:hidden; visibility:hidden; width:0; height:0
+  }
+  .row:after,.clearfix:after {
+    clear:both
+  }
+  .row,.clearfix {
+    zoom:1;
+  }
+  .clear {
+    clear:both; display:block; overflow:hidden; visibility:hidden; width:0; height:0
+  }
+}
